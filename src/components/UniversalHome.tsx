@@ -299,6 +299,16 @@ export default function UniversalHome({
       return;
     }
 
+    if (activeSlide.id === "merch") {
+      router.push("/au/product/merch");
+      return;
+    }
+
+    if (activeSlide.id === "fuel") {
+      router.push("/au/product/fuel");
+      return;
+    }
+
     onShop();
   };
 

@@ -14,49 +14,49 @@ const greetingCards = [
   {
     id: "seasons",
     title: "Season’s Greetings",
-    background: "#0e513d",
+    background: "#061a3d",
     color: "#ffffff",
   },
   {
     id: "dream",
     title: "Dream Big",
-    background: "#5b116f",
+    background: "#115cd0",
     color: "#ffffff",
   },
   {
     id: "root",
     title: "Root for each other",
-    background: "#c7ed26",
-    color: "#000000",
+    background: "#d8e5ff",
+    color: "#061a3d",
   },
   {
     id: "llama",
     title: "No prob-llama",
-    background: "#ec91d5",
+    background: "#0b2b66",
     color: "#ffffff",
   },
   {
     id: "magic",
     title: "Believe in magic",
-    background: "#101b2b",
+    background: "#020814",
     color: "#ffffff",
   },
   {
     id: "delivery",
     title: "Special delivery",
-    background: "#fff0f8",
-    color: "#68229b",
+    background: "#f4f7fb",
+    color: "#115cd0",
   },
   {
     id: "taco",
     title: "Taco bout a gift",
-    background: "#ffc400",
-    color: "#000000",
+    background: "#b7c7e8",
+    color: "#061a3d",
   },
   {
     id: "shake",
     title: "Shake it off",
-    background: "#8d4da6",
+    background: "#284f9f",
     color: "#ffffff",
   },
 ];
@@ -253,7 +253,28 @@ export default function UniversalPersonalizePage() {
               {mediaType === "gif" && (
                 <div className="gif-panel">
                   <div className="gif-search">
-                    <span>⌕</span>
+                    <svg
+                      className="gif-search-icon"
+                      viewBox="0 0 28 28"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="7.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3.4"
+                      />
+                      <path
+                        d="M18 18L25 25"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3.4"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                     <input placeholder="Search GIPHY" />
                   </div>
 
@@ -268,6 +289,11 @@ export default function UniversalPersonalizePage() {
                         {gif}
                       </button>
                     ))}
+                  </div>
+
+                  <div className="giphy-powered">
+                    <span>POWERED BY</span>
+                    <strong>GIPHY</strong>
                   </div>
                 </div>
               )}
@@ -424,12 +450,13 @@ export default function UniversalPersonalizePage() {
         }
 
 .personalize-card {
-  width: 798px;
+  width: 1110px;
   border-radius: 24px;
   background: #fff;
-  border: 1px solid #d8d8d8;
-  box-shadow: 0 22px 62px rgba(0, 0, 0, 0.11);
-  padding: 52px 50px 48px;
+  padding: 52px 72px 56px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 18px 56px rgba(0, 0, 0, 0.1);
 }
 
         .personalize-card h1 {
@@ -546,18 +573,18 @@ export default function UniversalPersonalizePage() {
         }
 
 .greeting-grid button {
-  height: 118px;
+  height: 128px;
   border: 0;
   border-radius: 16px;
-  font-size: 21px;
+  font-size: 26px;
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.7px;
   box-shadow: inset 0 0 0 0 transparent;
 }
 
         .greeting-grid button.is-selected {
-          box-shadow: inset 0 0 0 5px #000;
+          box-shadow: inset 0 0 0 5px #115cd0, inset 0 0 0 9px #ffffff;
         }
 
         .gif-panel {
@@ -566,32 +593,39 @@ export default function UniversalPersonalizePage() {
 
         .gif-search {
           width: 100%;
-          height: 90px;
+          height: 96px;
           border: 3px solid #111;
           border-radius: 999px;
           display: flex;
           align-items: center;
-          gap: 24px;
-          padding: 0 44px;
-          margin-bottom: 38px;
+          gap: 28px;
+          padding: 0 48px;
+          margin-bottom: 42px;
         }
 
-        .gif-search span {
+        .gif-search-icon {
+          width: 34px;
+          height: 34px;
+          flex: 0 0 34px;
           color: #000;
-          font-size: 42px;
-          font-weight: 700;
-          line-height: 1;
+          display: block;
+          transform: translateY(3px);
         }
 
-        .gif-search input {
-          width: 100%;
-          border: 0;
-          outline: 0;
-          background: transparent;
-          color: #4d4d4d;
-          font-size: 39px;
-          font-weight: 700;
-        }
+.gif-search input {
+  width: 100%;
+  height: 96px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #4d4d4d;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 96px;
+  padding: 0;
+  display: block;
+  transform: translateY(5px);
+}
 
         .gif-search input::placeholder {
           color: #4d4d4d;
@@ -604,20 +638,42 @@ export default function UniversalPersonalizePage() {
         }
 
         .gif-grid button {
-          height: 150px;
+          height: 164px;
           border: 0;
           border-radius: 12px;
           background: #f2f2f1;
-          font-size: 50px;
+          font-size: 68px;
+          line-height: 1;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
-.gif-grid button.is-selected {
+        .gif-grid button.is-selected {
   box-shadow: inset 0 0 0 5px #115cd0;
   background: #fff;
 }
+
+        .giphy-powered {
+          margin-top: 58px;
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          gap: 16px;
+          color: #b3b3b3;
+          font-size: 34px;
+          font-weight: 700;
+          line-height: 1;
+          letter-spacing: -0.8px;
+        }
+
+        .giphy-powered strong {
+          color: #777;
+          font-size: 50px;
+          font-weight: 700;
+          line-height: 0.9;
+          letter-spacing: -1.6px;
+        }
 
         .video-panel p {
           margin: 0 0 58px;
@@ -655,16 +711,16 @@ export default function UniversalPersonalizePage() {
 
 .message-panel textarea {
   width: 100%;
-  height: 240px;
+  height: 360px;
           resize: none;
           border: 2px solid #c8c8c8;
           border-radius: 10px;
           background: #fff;
           color: #000;
-          font-size: 39px;
+          font-size: 43px;
           font-weight: 500;
           line-height: 1.2;
-          padding: 52px;
+          padding: 56px 52px;
           outline: none;
         }
 
@@ -674,9 +730,9 @@ export default function UniversalPersonalizePage() {
         }
 
         .message-panel p {
-          margin: -62px 48px 0 0;
+          margin: -72px 48px 0 0;
           color: #111;
-          font-size: 29px;
+          font-size: 32px;
           font-weight: 700;
           text-align: right;
           pointer-events: none;
@@ -711,7 +767,7 @@ export default function UniversalPersonalizePage() {
 
         @media (max-width: 1180px) {
           .personalize-card {
-            width: 100%;
+            width: calc(100vw - 48px);
           }
         }
 
@@ -794,16 +850,46 @@ export default function UniversalPersonalizePage() {
 
           .greeting-grid button,
           .gif-grid button {
-            height: 112px;
+            height: 128px;
+          }
+
+          .greeting-grid button {
+            font-size: 22px;
+          }
+
+          .gif-grid button {
+            font-size: 58px;
           }
 
           .gif-search {
             height: 66px;
             padding: 0 24px;
+            gap: 16px;
+          }
+
+          .gif-search-icon {
+            width: 24px;
+            height: 24px;
+            flex-basis: 24px;
+            transform: translateY(2px);
           }
 
           .gif-search input {
+            height: 66px;
             font-size: 24px;
+            line-height: 66px;
+            padding: 0;
+            transform: translateY(3px);
+          }
+
+          .giphy-powered {
+            margin-top: 34px;
+            gap: 10px;
+            font-size: 22px;
+          }
+
+          .giphy-powered strong {
+            font-size: 32px;
           }
 
           .video-panel p {
@@ -816,14 +902,14 @@ export default function UniversalPersonalizePage() {
           }
 
           .message-panel textarea {
-            height: 260px;
-            padding: 28px;
-            font-size: 24px;
+            height: 340px;
+            padding: 32px 28px;
+            font-size: 26px;
           }
 
           .message-panel p {
-            margin: -44px 24px 0 0;
-            font-size: 20px;
+            margin: -52px 24px 0 0;
+            font-size: 22px;
           }
 
           .checkout-button {

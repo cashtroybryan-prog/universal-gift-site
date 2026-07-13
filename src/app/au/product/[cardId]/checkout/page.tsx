@@ -61,10 +61,12 @@ export default function UniversalCheckoutPage() {
   const recipientName = searchParams.get("name") || "";
   const recipientEmail = searchParams.get("email") || "";
   const recipientPhone = searchParams.get("phone") || "";
-  const giftMedia = searchParams.get("giftMedia") === "true";
-  const message = searchParams.get("message") === "true";
-  const mediaType = searchParams.get("mediaType") || "";
-  const personalMessage = searchParams.get("personalMessage") || "";
+const giftMedia = searchParams.get("giftMedia") === "true";
+const message = searchParams.get("message") === "true";
+const mediaType = searchParams.get("mediaType") || "";
+const personalMessage = searchParams.get("personalMessage") || "";
+const uploadedFile = searchParams.get("uploadedFile") || "";
+const selectedGif = searchParams.get("gif") || "";
 
   const [contactEmail, setContactEmail] = useState("");
   const [discountCode, setDiscountCode] = useState("");
@@ -178,20 +180,6 @@ const goToPayment = () => {
                   <span>Receipt</span>
                   <strong>{receiptLabel}</strong>
                 </div>
-
-                {giftMedia && (
-                  <div className="order-row">
-                    <span>Gift media</span>
-                    <strong>{mediaType || "Added"}</strong>
-                  </div>
-                )}
-
-                {message && (
-                  <div className="order-row">
-                    <span>Message</span>
-                    <strong>{personalMessage ? "Added" : "Added"}</strong>
-                  </div>
-                )}
               </div>
 
               <div className="secure-note">
@@ -245,6 +233,35 @@ const goToPayment = () => {
               <span>✓</span>
               <p>{deliveryCardMessage}</p>
             </div>
+
+{(giftMedia || message) && (
+  <div className="personalisation-card">
+    <h3>Personalisation added</h3>
+
+    {giftMedia && (
+      <div className="personalisation-row">
+        <span>Media</span>
+<strong>
+  {mediaType === "video"
+    ? uploadedFile || "Video added"
+    : mediaType === "gif"
+      ? selectedGif || "GIF added"
+      : mediaType === "greeting"
+        ? "Greeting card added"
+        : "Added"}
+</strong>
+      </div>
+    )}
+
+    {message && (
+      <div className="personalisation-row">
+        <span>Message</span>
+        <strong>{personalMessage || "Added"}</strong>
+      </div>
+    )}
+  </div>
+)}
+
           </div>
         </aside>
       </section>
@@ -303,17 +320,18 @@ const goToPayment = () => {
         }
 
 .checkout-brand {
-  width: 140px;
-  height: 52px;
+  width: 176px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .checkout-brand img {
-  width: 130px;
-  height: 56px;
+  width: 150px;
+  height: auto;
+  max-height: 62px;
   object-fit: contain;
   display: block;
 }
@@ -344,11 +362,11 @@ const goToPayment = () => {
           outline: none;
         }
 
-        .checkout-layout {
-          min-height: calc(100vh - 94px);
-          display: grid;
-          grid-template-columns: 1.08fr 0.92fr;
-        }
+.checkout-layout {
+  min-height: calc(100vh - 94px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
         .checkout-left {
           background: #fff;
@@ -362,13 +380,25 @@ const goToPayment = () => {
 .checkout-left-inner {
   width: min(595px, calc(100% - 96px));
   margin: 0 auto;
-  padding: 72px 0 80px;
+  padding: 72px 0 56px;
 }
 
 .checkout-right-inner {
   width: min(515px, calc(100% - 96px));
   margin: 0 auto;
-  padding: 72px 0 80px;
+  padding: 72px 0 56px;
+}
+
+@media (min-width: 1700px) {
+  .checkout-left-inner {
+    width: min(610px, calc(100% - 96px));
+    margin: 0 72px 0 auto;
+  }
+
+  .checkout-right-inner {
+    width: min(540px, calc(100% - 96px));
+    margin: 0 auto 0 72px;
+  }
 }
 
         .contact-section h1,
@@ -512,20 +542,35 @@ const goToPayment = () => {
           line-height: 1.15;
         }
 
-        .secure-note span,
-        .delivery-card span {
-          width: 25px;
-          height: 25px;
-          flex: 0 0 25px;
-          border-radius: 999px;
-          background: #115cd0;
-          color: #fff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 17px;
-          font-weight: 700;
-        }
+.secure-note span,
+.delivery-card span {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  border-radius: 999px;
+  background: #115cd0;
+  color: transparent;
+  position: relative;
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  padding: 0;
+}
+
+.secure-note span::after,
+.delivery-card span::after {
+  content: "✓";
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 
         .pay-button {
           width: 100%;
@@ -663,6 +708,61 @@ const goToPayment = () => {
           line-height: 1.18;
         }
 
+.personalisation-card {
+  margin-top: 18px;
+  width: 100%;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.08);
+  padding: 28px 34px;
+}
+
+.personalisation-card h3 {
+  height: 30px;
+  margin: 0 0 18px;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  padding-top: 3px;
+}
+
+.personalisation-row {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 26px;
+  align-items: start;
+  min-height: 56px;
+  padding: 15px 0;
+  border-top: 1px solid #ededeb;
+}
+
+.personalisation-row span,
+.personalisation-row strong {
+  display: block;
+  padding: 0;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.personalisation-row span {
+  color: #777;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.personalisation-row strong {
+  color: #000;
+  font-size: 19px;
+  font-weight: 700;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+  
         @media (max-width: 980px) {
           .checkout-layout {
             grid-template-columns: 1fr;
@@ -673,24 +773,26 @@ const goToPayment = () => {
             border-top: 1px solid #dddddd;
           }
 
-          .checkout-left-inner,
-          .checkout-right-inner {
-            width: min(595px, calc(100% - 36px));
-            padding: 44px 0;
-          }
+.checkout-left-inner,
+.checkout-right-inner {
+  width: min(620px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 44px 0 32px;
+}
 
 .checkout-brand {
-  width: 96px;
-  height: 34px;
+  width: 110px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .checkout-brand img {
-  width: 90px;
-  height: 30px;
+  width: 100px;
+  height: auto;
+  max-height: 38px;
   object-fit: contain;
   display: block;
 }

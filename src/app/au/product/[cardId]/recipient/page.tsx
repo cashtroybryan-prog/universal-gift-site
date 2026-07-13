@@ -460,8 +460,12 @@ const handleContinue = () => {
           color: #fff;
           font-size: 35px;
           font-weight: 700;
-          line-height: 1;
+          line-height: 62px;
           padding: 0 28px;
+          display: block;
+          text-align: center;
+          appearance: none;
+          -webkit-appearance: none;
         }
 
         .amount-chevron {
@@ -515,8 +519,14 @@ const handleContinue = () => {
           border-radius: 999px;
           background: #000;
           color: #fff;
-          font-size: 19px;
+          font-size: 23px;
           font-weight: 700;
+          line-height: 62px;
+          padding: 0 14px;
+          display: block;
+          text-align: center;
+          appearance: none;
+          -webkit-appearance: none;
         }
 
         .amount-menu button.is-selected {

@@ -139,11 +139,19 @@ const goToPayment = () => {
               <input
                 value={contactEmail}
                 onChange={(event) => setContactEmail(event.target.value)}
-                placeholder="Email for gift card and receipt"
+                placeholder={
+  recipientType === "myself"
+    ? "Email for gift card and receipt"
+    : "Email for receipt"
+}
                 type="email"
               />
 
-              <p>Email is required for the gift card to be sent and for the receipt.</p>
+<p>
+  {recipientType === "myself"
+    ? "Email is required for the gift card to be sent and for the receipt."
+    : "Email is required for your receipt."}
+</p>
 
               <label className="news-check">
                 <input

@@ -469,19 +469,25 @@ const goToPayment = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          position: relative;
         }
 
         .news-check input:checked + span {
           background: #000;
         }
 
-        .news-check input:checked + span::after {
-          content: "✓";
-          color: #fff;
-          font-size: 18px;
-          font-weight: 700;
-          line-height: 1;
-        }
+.news-check input:checked + span::after {
+  content: "✓";
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+}
 
 .order-section {
   margin-top: 42px;

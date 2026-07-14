@@ -68,9 +68,11 @@ const personalMessage = searchParams.get("personalMessage") || "";
 const uploadedFile = searchParams.get("uploadedFile") || "";
 const selectedGif = searchParams.get("gif") || "";
 
-  const [contactEmail, setContactEmail] = useState("");
-  const [discountCode, setDiscountCode] = useState("");
-  const [newsOptIn, setNewsOptIn] = useState(true);
+const [contactEmail, setContactEmail] = useState("");
+const [discountCode, setDiscountCode] = useState("");
+const [newsOptIn, setNewsOptIn] = useState(true);
+const [paymentLoading, setPaymentLoading] = useState(false);
+const [paymentError, setPaymentError] = useState("");
 
   const contactReady = isValidEmail(contactEmail);
 
@@ -106,8 +108,59 @@ const deliveryCardMessage =
     router.push("/au/shop");
   };
 
-const goToPayment = () => {
-  if (!contactReady) return;
+const goToPayment = async () => {
+  if (!contactReady || paymentLoading) return;
+
+  setPaymentLoading(true);
+  setPaymentError("");
+
+  try {
+    const response = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cardId,
+        productTitle: product.title,
+        amount,
+        currency: "aud",
+        contactEmail: contactEmail.trim(),
+        recipientType,
+        recipientName,
+        recipientEmail,
+        recipientPhone,
+        giftMedia,
+        message,
+        mediaType,
+        personalMessage,
+        uploadedFile,
+        selectedGif,
+        newsOptIn,
+        discountCode: discountCode.trim(),
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data?.error || "Unable to start payment.");
+    }
+
+    if (!data?.url) {
+      throw new Error("Stripe checkout URL was not returned.");
+    }
+
+    window.location.assign(data.url);
+  } catch (error) {
+    setPaymentError(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong while opening payment."
+    );
+
+    setPaymentLoading(false);
+  }
 };
 
   return (
@@ -195,14 +248,22 @@ const goToPayment = () => {
                 Your payment is secure and encrypted on the next screen.
               </div>
 
-              <button
-                type="button"
-                className={`pay-button ${contactReady ? "is-ready" : ""}`}
-                disabled={!contactReady}
-                onClick={goToPayment}
-              >
-                Pay {formatMoney(amount)}
-              </button>
+<button
+  type="button"
+  className={`pay-button ${contactReady ? "is-ready" : ""}`}
+  disabled={!contactReady || paymentLoading}
+  onClick={goToPayment}
+>
+  {paymentLoading
+    ? "Opening secure payment..."
+    : `Pay ${formatMoney(amount)}`}
+</button>
+
+{paymentError && (
+  <p className="payment-error" role="alert">
+    {paymentError}
+  </p>
+)}
             </section>
           </div>
         </section>
@@ -613,6 +674,19 @@ const goToPayment = () => {
           gap: 28px;
           align-items: center;
         }
+
+        .pay-button:disabled {
+  cursor: not-allowed;
+}
+
+.payment-error {
+  margin: 14px 0 0;
+  color: #c62828;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
 
         .mini-product img {
           width: 122px;

@@ -1,167 +1,318 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
-type Order = {
-  stripe_session_id: string;
-  product_title: string | null;
-  gift_amount: string | null;
-  currency: string | null;
-  checkout_email: string | null;
-  customer_email: string | null;
-  recipient_type: string | null;
-  recipient_email: string | null;
-  recipient_name: string | null;
-  gift_code: string | null;
-  fulfilment_status: string | null;
-};
+export default function UniversalThankYouPage() {
+  const params = useParams();
+  const router = useRouter();
 
-const formatCurrency = (currency?: string | null) => {
-  if (currency === "gbp") return "£";
-  if (currency === "aud") return "AU$";
-  if (currency === "nzd") return "NZ$";
-  if (currency === "cad") return "CA$";
-  return "US$";
-};
-
-export default function ThankYouPage() {
-  const [order, setOrder] = useState<Order | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [country, setCountry] = useState("us");
-
-  useEffect(() => {
-    const countryFromPath = window.location.pathname.split("/")[1] || "us";
-    setCountry(countryFromPath);
-
-    const searchParams = new URLSearchParams(window.location.search);
-    const sessionId = searchParams.get("session_id");
-
-    if (!sessionId) {
-      setError("Missing order session ID.");
-      setIsLoading(false);
-      return;
-    }
-
-    const fetchOrder = async () => {
-      try {
-        const response = await fetch(`/api/orders/${encodeURIComponent(sessionId)}`);
-        const data = await response.json();
-
-        if (!response.ok) {
-          setError(data.error ?? "Could not find your order yet.");
-          return;
-        }
-
-        setOrder(data.order);
-      } catch (fetchError) {
-        console.error("Failed to fetch order:", fetchError);
-        setError("Could not load your order details.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchOrder();
-  }, []);
-
-  const giftValue = order?.gift_amount
-    ? `${formatCurrency(order.currency)}${Number(order.gift_amount).toFixed(2)}`
-    : "";
-
-  const deliveryEmail =
-    order?.recipient_type === "someone" && order?.recipient_email
-      ? order.recipient_email
-      : order?.checkout_email || order?.customer_email || "your email";
+  const rawCountry = params.country;
+  const country = typeof rawCountry === "string" ? rawCountry : "au";
 
   return (
-    <main
-      className="min-h-screen bg-[#cbea19] flex items-center justify-center px-6 py-12 text-center"
-      style={{ fontFamily: '"Link Sans", "Inter", Arial, sans-serif' }}
-    >
-      <div className="w-full max-w-[760px] rounded-[42px] bg-white px-10 py-14 shadow-[0_24px_90px_rgba(0,0,0,0.16)]">
+    <main className="thank-you-page">
+      <section className="thank-you-card">
         <img
-          src="/images/linktree-logo.png"
-          alt="Linktree"
-          className="mx-auto mb-10 h-auto w-[180px]"
+          className="universal-logo"
+          src="/images/universal-logo.png"
+          alt="Universal"
+          draggable={false}
         />
 
-        <div className="mx-auto mb-8 flex h-[74px] w-[74px] items-center justify-center rounded-full bg-[#ccff00] text-[34px] font-black text-black">
-          ✓
+        <div className="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12.5L9.3 17L19 7" />
+          </svg>
         </div>
 
-        <h1 className="text-[56px] leading-[0.9] font-black tracking-[-2.5px] text-black">
-          Thank you for your purchase
-        </h1>
+        <p className="eyebrow">Payment successful</p>
 
-        {isLoading && (
-          <p className="mx-auto mt-6 max-w-[560px] text-[20px] leading-[1.25] font-bold text-[#555555]">
-            Loading your gift card details...
-          </p>
-        )}
+        <h1>Thank you for your purchase</h1>
 
-        {!isLoading && error && (
-          <>
-            <p className="mx-auto mt-6 max-w-[560px] text-[20px] leading-[1.25] font-bold text-[#555555]">
-              Your payment was successful, but your order details are still loading.
+        <p className="description">
+          Your Universal Gift Card is being prepared and will be delivered
+          using the recipient details provided at checkout.
+        </p>
+
+        <div className="confirmation-box">
+          <span className="confirmation-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 6.5H20V17.5H4V6.5Z" />
+              <path d="M4.5 7L12 13L19.5 7" />
+            </svg>
+          </span>
+
+          <div>
+            <strong>Check your email</strong>
+            <p>
+              A payment confirmation and gift delivery update will be sent
+              shortly.
             </p>
-            <p className="mt-4 text-[15px] font-bold text-[#777777]">{error}</p>
-          </>
-        )}
+          </div>
+        </div>
 
-        {!isLoading && order && (
-          <>
-            <p className="mx-auto mt-6 max-w-[560px] text-[20px] leading-[1.25] font-bold text-[#555555]">
-              Your payment was successful. Your gift card details will be sent by email.
-            </p>
+        <div className="thank-you-actions">
+          <button
+            className="primary-button"
+            type="button"
+            onClick={() => router.push(`/${country}/gift-tracker`)}
+          >
+            <span>Track your gift</span>
 
-            <div className="mx-auto mt-9 max-w-[560px] rounded-[30px] border border-[#e5e5e5] bg-[#f7f7f4] p-7 text-left">
-              <div className="mb-5 flex items-start justify-between gap-5">
-                <div>
-                  <p className="text-[13px] font-black uppercase tracking-[0.12em] text-[#777777]">
-                    Gift card
-                  </p>
-                  <h2 className="mt-1 text-[26px] leading-[1] font-black text-black">
-                    {order.product_title ?? "Linktree eGift Card"}
-                  </h2>
-                </div>
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M4 10H16M11 5L16 10L11 15" />
+            </svg>
+          </button>
 
-                {giftValue && (
-                  <div className="rounded-full bg-[#ccff00] px-5 py-3 text-[18px] font-black text-black">
-                    {giftValue}
-                  </div>
-                )}
-              </div>
+          <button
+            className="secondary-button"
+            type="button"
+            onClick={() => router.push(`/${country}/home`)}
+          >
+            Return home
+          </button>
+        </div>
+      </section>
 
-              <div className="rounded-[22px] bg-white px-5 py-5">
-                <p className="text-[13px] font-black uppercase tracking-[0.12em] text-[#777777]">
-                  Delivery
-                </p>
-                <p className="mt-2 text-[22px] leading-[1.1] font-black tracking-[-0.4px] text-black">
-                  Your gift card code will be sent by email.
-                </p>
-              </div>
+      <style jsx>{`
+        .thank-you-page {
+          width: 100%;
+          min-height: 100vh;
+          padding: 48px 24px;
+          background:
+            radial-gradient(
+              circle at 50% 20%,
+              rgba(17, 92, 208, 0.55) 0%,
+              rgba(17, 92, 208, 0) 42%
+            ),
+            #030b1d;
+          color: #ffffff;
+          font-family: "Futura", sans-serif;
+          font-synthesis: none;
+          -webkit-font-smoothing: antialiased;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+        }
 
-              <div className="mt-5 grid gap-3 text-[16px] font-bold text-[#555555]">
-                <p>
-                  <span className="text-black">Delivery:</span> {deliveryEmail}
-                </p>
-                <p>
-                  <span className="text-black">Status:</span>{" "}
-                  {order.fulfilment_status ?? "created"}
-                </p>
-              </div>
-            </div>
-          </>
-        )}
+        .thank-you-page * {
+          box-sizing: border-box;
+          font-family: inherit;
+          font-synthesis: none;
+        }
 
-        <a
-          href={`/${country}/home`}
-          className="mx-auto mt-9 flex h-[58px] w-fit items-center justify-center rounded-full bg-black px-10 text-[18px] font-black text-white no-underline"
-        >
-          Go home
-        </a>
-      </div>
+        .thank-you-card {
+          width: min(580px, 100%);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 42px;
+          background: #ffffff;
+          color: #000000;
+          padding: 54px 58px 58px;
+          text-align: center;
+          box-shadow: 0 32px 90px rgba(0, 0, 0, 0.3);
+        }
+
+        .universal-logo {
+          width: 132px;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+          user-select: none;
+        }
+
+        .success-icon {
+          width: 66px;
+          height: 66px;
+          margin: 34px auto 0;
+          border-radius: 999px;
+          background: #115cd0;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 16px 34px rgba(17, 92, 208, 0.26);
+        }
+
+        .success-icon svg {
+          width: 31px;
+          height: 31px;
+          fill: none;
+          stroke: currentColor;
+          stroke-width: 2.6;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .eyebrow {
+          margin: 26px 0 0;
+          color: #115cd0;
+          font-size: 17px;
+          font-weight: 700;
+          line-height: 1;
+        }
+
+        h1 {
+          max-width: 430px;
+          margin: 15px auto 0;
+          font-size: 46px;
+          font-weight: 700;
+          line-height: 0.98;
+          letter-spacing: -1.7px;
+        }
+
+        .description {
+          max-width: 450px;
+          margin: 22px auto 0;
+          color: #626262;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+
+        .confirmation-box {
+          width: 100%;
+          margin-top: 30px;
+          border-radius: 22px;
+          background: #f1f5fc;
+          padding: 20px 22px;
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          text-align: left;
+        }
+
+        .confirmation-icon {
+          width: 42px;
+          height: 42px;
+          flex: 0 0 42px;
+          border-radius: 999px;
+          background: #115cd0;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .confirmation-icon svg {
+          width: 21px;
+          height: 21px;
+          fill: none;
+          stroke: currentColor;
+          stroke-width: 1.9;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .confirmation-box strong {
+          display: block;
+          margin-top: 1px;
+          font-size: 17px;
+          font-weight: 700;
+          line-height: 1.2;
+        }
+
+        .confirmation-box p {
+          margin: 6px 0 0;
+          color: #666666;
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+
+        .thank-you-actions {
+          margin-top: 32px;
+          display: grid;
+          gap: 12px;
+        }
+
+        button {
+          width: 100%;
+          height: 60px;
+          border-radius: 999px;
+          font-size: 17px;
+          font-weight: 700;
+          cursor: pointer;
+          transition:
+            transform 180ms ease,
+            background 180ms ease,
+            color 180ms ease,
+            border-color 180ms ease;
+        }
+
+        button:hover {
+          transform: translateY(-1px);
+        }
+
+        .primary-button {
+          border: 1px solid #115cd0;
+          background: #115cd0;
+          color: #ffffff;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+        }
+
+        .primary-button:hover {
+          border-color: #000000;
+          background: #000000;
+        }
+
+        .primary-button svg {
+          width: 20px;
+          height: 20px;
+          fill: none;
+          stroke: currentColor;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .secondary-button {
+          border: 1px solid #d7d7d7;
+          background: #ffffff;
+          color: #000000;
+        }
+
+        .secondary-button:hover {
+          border-color: #000000;
+        }
+
+        @media (max-width: 620px) {
+          .thank-you-page {
+            padding: 24px 16px;
+          }
+
+          .thank-you-card {
+            padding: 42px 24px 34px;
+            border-radius: 30px;
+          }
+
+          .universal-logo {
+            width: 112px;
+          }
+
+          .success-icon {
+            width: 58px;
+            height: 58px;
+            margin-top: 28px;
+          }
+
+          h1 {
+            font-size: 38px;
+            letter-spacing: -1.3px;
+          }
+
+          .description {
+            font-size: 16px;
+          }
+
+          .confirmation-box {
+            padding: 18px;
+          }
+        }
+      `}</style>
     </main>
   );
 }

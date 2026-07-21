@@ -992,10 +992,10 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
             padding: 30px;
           }
         }
-          /* =========================================================
-   FINAL GIFT TRACKER MOBILE NAV AND CENTRED INTRO
-   Matches the Universal Shop mobile navigation.
-   Desktop remains unchanged.
+/* =========================================================
+   FINAL GIFT TRACKER MOBILE
+   Matches the approved Universal homepage navigation.
+   Desktop remains completely untouched.
    ========================================================= */
 
 .shop-mobile-menu-button,
@@ -1004,31 +1004,40 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 }
 
 @media (max-width: 760px) {
+  /* PAGE POSITIONING */
+
   .tracker-page {
+    width: 100% !important;
+    min-height: 100dvh !important;
+
     padding-top:
       calc(
         max(
-            52px,
-            calc(env(safe-area-inset-top, 0px) + 12px)
-          ) + 23vw
+            14px,
+            calc(env(safe-area-inset-top, 0px) + 8px)
+          ) + 21vw
       ) !important;
+
+    overflow-x: hidden !important;
   }
 
   /* MOBILE WHITE NAV */
 
-  .shop-nav-pill {
+  .tracker-page .shop-nav-pill {
     position: fixed !important;
+    display: block !important;
 
     left: 3.5398vw !important;
     right: auto !important;
+
     top: max(
-      52px,
-      calc(env(safe-area-inset-top, 0px) + 12px)
+      14px,
+      calc(env(safe-area-inset-top, 0px) + 8px)
     ) !important;
 
     width: 92.9204vw !important;
     max-width: none !important;
-    height: 16.8142vw !important;
+    height: clamp(52px, 16.8142vw, 66px) !important;
 
     margin: 0 !important;
     padding: 0 !important;
@@ -1037,45 +1046,42 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     border-radius: 11.0619vw !important;
 
     background: #ffffff !important;
-
-    transform: none !important;
-
     box-shadow: none !important;
 
     overflow: visible !important;
+    box-sizing: border-box !important;
+
+    transform: none !important;
     z-index: 1000 !important;
   }
 
-  .shop-nav-pill-hidden {
+  .tracker-page .shop-nav-pill-hidden {
     transform: translateY(-150%) !important;
-    opacity: 1 !important;
+    opacity: 0 !important;
     pointer-events: none !important;
   }
 
-  .shop-nav-left,
-  .shop-nav-actions {
-    position: static !important;
-    display: block !important;
+  /* Remove desktop flex positioning */
 
-    width: auto !important;
-    height: auto !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
+  .tracker-page .shop-nav-left,
+  .tracker-page .shop-nav-actions,
+  .tracker-page .shop-nav-links {
+    display: contents !important;
   }
 
-  /* Universal logo */
+  /* UNIVERSAL LOGO */
 
-  .shop-logo {
+  .tracker-page .shop-logo {
     position: absolute !important;
     display: flex !important;
 
     left: 3.8vw !important;
     top: 50% !important;
 
-    width: 13vw !important;
-    height: 10vw !important;
-    flex: none !important;
+    width: 13.8vw !important;
+    height: 9vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
 
     align-items: center !important;
     justify-content: center !important;
@@ -1083,43 +1089,42 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     margin: 0 !important;
     padding: 0 !important;
 
+    overflow: visible !important;
     transform: translateY(-50%) !important;
 
     z-index: 5 !important;
   }
 
-  .shop-logo img {
-    display: block !important;
-
-    width: 13vw !important;
-    max-width: none !important;
-    height: auto !important;
-
-    object-fit: contain !important;
-  }
-
-  /* Shop Gift Cards label */
-
-  .shop-nav-links {
+  .tracker-page .shop-logo img {
     position: static !important;
     display: block !important;
 
-    width: auto !important;
-    height: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    transform: none !important;
   }
 
-  .shop-nav-links .shop-nav-desktop-link {
+  /* NAVIGATION LINKS */
+
+  .tracker-page .shop-nav-links .shop-nav-desktop-link {
     display: none !important;
   }
 
-  .shop-nav-links .shop-nav-shop-link {
+  .tracker-page .shop-nav-links .shop-nav-shop-link {
     position: absolute !important;
     display: flex !important;
 
-    left: 17.8vw !important;
-    top: 50% !important;
+    left: 19.2vw !important;
+    top: calc(50% + 0.45vw) !important;
 
-    width: 26vw !important;
+    width: 28.5vw !important;
     height: 6vw !important;
 
     align-items: center !important;
@@ -1134,11 +1139,13 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     background: transparent !important;
     color: #111111 !important;
 
-    font-size: 3.35vw !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(11.5px, 3.35vw, 14.5px) !important;
     font-weight: 700 !important;
     line-height: 1 !important;
     letter-spacing: -0.05vw !important;
 
+    text-align: left !important;
     white-space: nowrap !important;
 
     transform: translateY(-50%) !important;
@@ -1146,18 +1153,33 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     z-index: 5 !important;
   }
 
-  /* Australia pill */
+  .tracker-page .shop-nav-links .shop-nav-shop-link:hover,
+  .tracker-page .shop-nav-links .shop-nav-shop-link:focus-visible {
+    border: 0 !important;
+    background: transparent !important;
+    outline: none !important;
+  }
 
-  .shop-country-pill {
+  /* AUSTRALIA BUBBLE */
+
+  .tracker-page .shop-country-pill,
+  .tracker-page .shop-country-pill:hover {
     position: absolute !important;
     display: flex !important;
 
-    left: 46.8vw !important;
+    left: 49vw !important;
+    right: auto !important;
     top: 50% !important;
 
-    width: 31.2vw !important;
-    height: 7.35vw !important;
+    width: 32vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 8.3vw !important;
+    min-height: 27px !important;
+    max-height: 34px !important;
+
     flex: none !important;
+    flex-basis: auto !important;
 
     align-items: center !important;
     justify-content: center !important;
@@ -1171,40 +1193,41 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     background: #115cd0 !important;
     color: #ffffff !important;
 
-    font-size: 1.82vw !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(7.4px, 2.15vw, 9.4px) !important;
     font-weight: 700 !important;
-    line-height: 0.98 !important;
-    letter-spacing: -0.015vw !important;
-    text-align: center !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.02vw !important;
 
-    white-space: normal !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+
+    overflow: hidden !important;
+    box-sizing: border-box !important;
 
     transform: translateY(-50%) !important;
 
-    overflow: hidden !important;
     z-index: 8 !important;
   }
 
-  .shop-country-pill:hover {
-    background: #115cd0 !important;
-  }
-
-  .shop-login-btn,
-  .shop-signup-btn {
+  .tracker-page .shop-login-btn,
+  .tracker-page .shop-signup-btn {
     display: none !important;
   }
 
-  /* Hamburger */
+  /* HAMBURGER */
 
-  .shop-mobile-menu-button {
+  .tracker-page .shop-mobile-menu-button {
     position: absolute !important;
     display: flex !important;
 
-    right: 4.8vw !important;
+    right: 3.2vw !important;
     top: 50% !important;
 
     width: 7.9646vw !important;
     height: 7.9646vw !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
 
     flex-direction: column !important;
     align-items: center !important;
@@ -1224,10 +1247,12 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     z-index: 20 !important;
   }
 
-  .shop-mobile-menu-button span {
+  .tracker-page .shop-mobile-menu-button span {
     display: block !important;
 
     width: 5.7522vw !important;
+    max-width: 21px !important;
+
     height: 0.4425vw !important;
     min-height: 1.5px !important;
 
@@ -1239,21 +1264,27 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
       opacity 180ms ease !important;
   }
 
-  .shop-mobile-menu-button.is-open span:nth-child(1) {
+  .tracker-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(1) {
     transform: translateY(1.3274vw) rotate(45deg) !important;
   }
 
-  .shop-mobile-menu-button.is-open span:nth-child(2) {
+  .tracker-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(2) {
     opacity: 0 !important;
   }
 
-  .shop-mobile-menu-button.is-open span:nth-child(3) {
+  .tracker-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(3) {
     transform: translateY(-1.3274vw) rotate(-45deg) !important;
   }
 
-  /* Mobile dropdown */
+  /* OPEN MOBILE MENU */
 
-  .shop-mobile-nav-menu {
+  .tracker-page .shop-mobile-nav-menu {
     position: absolute !important;
     display: grid !important;
 
@@ -1269,17 +1300,17 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     border-radius: 4.4248vw !important;
 
     background: #ffffff !important;
-
     box-shadow: 0 4vw 10vw rgba(0, 0, 0, 0.14) !important;
 
     z-index: 30 !important;
   }
 
-  .shop-mobile-nav-menu button {
+  .tracker-page .shop-mobile-nav-menu button {
     display: flex !important;
 
     width: 100% !important;
     height: 10.6195vw !important;
+    min-height: 38px !important;
 
     align-items: center !important;
 
@@ -1291,59 +1322,175 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     background: #f3f3f1 !important;
     color: #111111 !important;
 
-    font-family: inherit !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
     font-size: 3.5398vw !important;
     font-weight: 700 !important;
     text-align: left !important;
+
+    cursor: pointer !important;
   }
 
-  .shop-mobile-nav-menu .shop-mobile-nav-signup {
+  .tracker-page
+    .shop-mobile-nav-menu
+    .shop-mobile-nav-signup {
     background: #000000 !important;
     color: #ffffff !important;
   }
 
-  /* CENTRE THE MOBILE TITLE AREA */
+  /* TRACKER CONTENT */
 
-  .tracker-shell {
-    padding-top: 10vw !important;
+  .tracker-page .tracker-shell {
+    width: calc(100% - 32px) !important;
+    margin: 0 auto !important;
+    padding: 7vw 0 18vw !important;
   }
 
-  .tracker-intro {
+  .tracker-page .tracker-intro {
     width: 100% !important;
     max-width: none !important;
-
     margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  .tracker-page .tracker-intro .eyebrow {
+    width: 100% !important;
+    margin: 0 auto !important;
+
+    color: #115cd0 !important;
+    font-size: 5.2vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
 
     text-align: center !important;
   }
 
-  .tracker-intro .eyebrow {
+  .tracker-page .tracker-intro h1 {
     width: 100% !important;
+    max-width: 100% !important;
 
-    margin: 0 auto !important;
+    margin: 4vw auto 0 !important;
+
+    color: #000000 !important;
+    font-size: 10.5vw !important;
+    font-weight: 700 !important;
+    line-height: 1.01 !important;
+    letter-spacing: -0.45vw !important;
 
     text-align: center !important;
   }
 
-.tracker-intro h1 {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  margin: 14px auto 0 !important;
-
-  font-size: 42px !important;
-  line-height: 1.06 !important;
-  letter-spacing: -2px !important;
-  text-align: center !important;
-}
-
-  .tracker-intro .intro-copy {
+  .tracker-page .tracker-intro .intro-copy {
     width: 100% !important;
-    max-width: 315px !important;
+    max-width: 82vw !important;
 
-    margin: 22px auto 0 !important;
+    margin: 5vw auto 0 !important;
+
+    color: #6d6d6d !important;
+    font-size: 4.2vw !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
 
     text-align: center !important;
+  }
+
+  .tracker-page .tracker-content {
+    display: flex !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    gap: 5vw !important;
+    margin-top: 9vw !important;
+  }
+
+  .tracker-page form,
+  .tracker-page .status-card,
+  .tracker-page .empty-status {
+    width: 100% !important;
+    padding: 6vw !important;
+    border-width: 0.45vw !important;
+    border-radius: 6vw !important;
+  }
+
+  .tracker-page form {
+    gap: 5vw !important;
+  }
+
+  .tracker-page label {
+    gap: 2.5vw !important;
+    font-size: 4vw !important;
+  }
+
+  .tracker-page input {
+    height: 14vw !important;
+    padding: 0 4vw !important;
+
+    border-radius: 3vw !important;
+
+    font-size: 16px !important;
+  }
+
+  .tracker-page form button {
+    height: 14vw !important;
+    margin-top: 1vw !important;
+
+    font-size: 4.5vw !important;
+  }
+
+  .tracker-page .empty-status {
+    min-height: 75vw !important;
+  }
+
+  .tracker-page .empty-status > span {
+    width: 15vw !important;
+    height: 15vw !important;
+
+    font-size: 6vw !important;
+  }
+
+  .tracker-page .empty-status h2 {
+    margin-top: 5vw !important;
+
+    font-size: 7vw !important;
+    line-height: 1.05 !important;
+  }
+
+  .tracker-page .empty-status p {
+    margin-top: 3vw !important;
+
+    font-size: 3.8vw !important;
+    line-height: 1.35 !important;
+  }
+
+  .tracker-page .support-card {
+    display: flex !important;
+    width: 100% !important;
+
+    flex-direction: column !important;
+    align-items: flex-start !important;
+
+    gap: 5vw !important;
+    margin-top: 5vw !important;
+    padding: 6vw !important;
+
+    border-radius: 6vw !important;
+  }
+
+  .tracker-page .support-card h2 {
+    font-size: 6.5vw !important;
+    line-height: 1.05 !important;
+  }
+
+  .tracker-page .support-card p {
+    margin-top: 3vw !important;
+
+    font-size: 3.8vw !important;
+    line-height: 1.35 !important;
+  }
+
+  .tracker-page .support-card button {
+    width: 100% !important;
+    height: 13vw !important;
+
+    font-size: 4vw !important;
   }
 }
       `}</style>

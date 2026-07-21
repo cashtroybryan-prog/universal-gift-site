@@ -2083,6 +2083,352 @@ const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
     transform: translateY(2px) !important;
   }
 }
+  /* =========================================================
+   FINAL UNIVERSAL SHOP MOBILE NAV
+   Matches the approved Universal homepage navigation.
+   Keep this as the final CSS block.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .universal-shop-page {
+    padding-top: calc(
+      max(
+          14px,
+          calc(env(safe-area-inset-top, 0px) + 8px)
+        ) + 23vw
+    ) !important;
+  }
+
+  .universal-shop-page .shop-nav-pill {
+    position: fixed !important;
+    display: block !important;
+
+    left: 3.5398vw !important;
+    right: auto !important;
+    top: max(
+      14px,
+      calc(env(safe-area-inset-top, 0px) + 8px)
+    ) !important;
+
+    width: 92.9204vw !important;
+    max-width: none !important;
+    height: clamp(52px, 16.8142vw, 66px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 11.0619vw !important;
+
+    background: #ffffff !important;
+    box-shadow: none !important;
+
+    overflow: visible !important;
+    box-sizing: border-box !important;
+
+    transform: none !important;
+    opacity: 1 !important;
+
+    z-index: 1000 !important;
+  }
+
+  .universal-shop-page .shop-nav-pill.shop-nav-pill-hidden {
+    transform: translateY(-150%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Remove desktop layout positioning */
+
+  .universal-shop-page .shop-nav-left,
+  .universal-shop-page .shop-nav-actions,
+  .universal-shop-page .shop-nav-links {
+    display: contents !important;
+  }
+
+  /* Universal logo */
+
+  .universal-shop-page .shop-logo {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 3.8vw !important;
+    top: 50% !important;
+
+    width: 13.8vw !important;
+    height: 9vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: visible !important;
+    transform: translateY(-50%) !important;
+
+    z-index: 5 !important;
+  }
+
+  .universal-shop-page .shop-logo img {
+    position: static !important;
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    transform: none !important;
+  }
+
+  /* Hide desktop links */
+
+  .universal-shop-page
+    .shop-nav-links
+    .shop-nav-desktop-link {
+    display: none !important;
+  }
+
+  /* Shop Gift Cards */
+
+  .universal-shop-page
+    .shop-nav-links
+    .shop-nav-shop-link {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 19.2vw !important;
+    top: calc(50% + 0.45vw) !important;
+
+    width: 28.5vw !important;
+    height: 6vw !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    color: #111111 !important;
+
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(11.5px, 3.35vw, 14.5px) !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.05vw !important;
+
+    text-align: left !important;
+    white-space: nowrap !important;
+
+    transform: translateY(-50%) !important;
+
+    z-index: 5 !important;
+  }
+
+  .universal-shop-page
+    .shop-nav-links
+    .shop-nav-shop-link:hover,
+  .universal-shop-page
+    .shop-nav-links
+    .shop-nav-shop-link:focus-visible {
+    border: 0 !important;
+    background: transparent !important;
+    outline: none !important;
+  }
+
+  /* Australia bubble */
+
+  .universal-shop-page .shop-country-pill,
+  .universal-shop-page .shop-country-pill:hover {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 49vw !important;
+    right: auto !important;
+    top: 50% !important;
+
+    width: 32vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 8.3vw !important;
+    min-height: 27px !important;
+    max-height: 34px !important;
+
+    flex: none !important;
+    flex-basis: auto !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 1.4vw !important;
+
+    border: 0 !important;
+    border-radius: 999px !important;
+
+    background: #115cd0 !important;
+    color: #ffffff !important;
+
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(7.4px, 2.15vw, 9.4px) !important;
+    font-weight: 700 !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.02vw !important;
+
+    text-align: center !important;
+    white-space: nowrap !important;
+
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+
+    transform: translateY(-50%) !important;
+
+    z-index: 8 !important;
+  }
+
+  .universal-shop-page .shop-login-btn,
+  .universal-shop-page .shop-signup-btn {
+    display: none !important;
+  }
+
+  /* Hamburger */
+
+  .universal-shop-page .shop-mobile-menu-button {
+    position: absolute !important;
+    display: flex !important;
+
+    right: 3.2vw !important;
+    top: 50% !important;
+
+    width: 7.9646vw !important;
+    height: 7.9646vw !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 0.8849vw !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    background: transparent !important;
+
+    transform: translateY(-50%) !important;
+
+    cursor: pointer !important;
+    z-index: 20 !important;
+  }
+
+  .universal-shop-page
+    .shop-mobile-menu-button
+    span {
+    display: block !important;
+
+    width: 5.7522vw !important;
+    max-width: 21px !important;
+
+    height: 0.4425vw !important;
+    min-height: 1.5px !important;
+
+    border-radius: 999px !important;
+    background: #111111 !important;
+
+    transition:
+      transform 180ms ease,
+      opacity 180ms ease !important;
+  }
+
+  .universal-shop-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(1) {
+    transform: translateY(1.3274vw) rotate(45deg) !important;
+  }
+
+  .universal-shop-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .universal-shop-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(3) {
+    transform: translateY(-1.3274vw) rotate(-45deg) !important;
+  }
+
+  /* Open hamburger menu */
+
+  .universal-shop-page .shop-mobile-nav-menu {
+    position: absolute !important;
+    display: grid !important;
+
+    right: 0 !important;
+    top: calc(100% + 2.6549vw) !important;
+
+    width: 56vw !important;
+
+    padding: 2.6549vw !important;
+    gap: 1.3274vw !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 4.4248vw !important;
+
+    background: #ffffff !important;
+    box-shadow: 0 4vw 10vw rgba(0, 0, 0, 0.14) !important;
+
+    z-index: 30 !important;
+  }
+
+  .universal-shop-page
+    .shop-mobile-nav-menu
+    button {
+    display: flex !important;
+
+    width: 100% !important;
+    height: 10.6195vw !important;
+    min-height: 38px !important;
+
+    align-items: center !important;
+
+    padding: 0 3.5398vw !important;
+
+    border: 0 !important;
+    border-radius: 3.0973vw !important;
+
+    background: #f3f3f1 !important;
+    color: #111111 !important;
+
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: 3.5398vw !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+
+    cursor: pointer !important;
+  }
+
+  .universal-shop-page
+    .shop-mobile-nav-menu
+    .shop-mobile-nav-signup {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+}
       `}</style>
     </main>
   );

@@ -1773,25 +1773,24 @@ className={`brand-showcase-card ${
             font-size: 25px;
           }
         }
-          .mobile-menu-button,
+.mobile-menu-button,
 .mobile-nav-menu {
   display: none;
 }
 
 /* =========================================================
    FINAL UNIVERSAL MOBILE NAV
-   Uses the same spacing proportions as the Linktree nav.
-   Desktop remains untouched.
+   Mirrors the Linktree mobile navigation proportions.
+   Desktop remains completely untouched.
    ========================================================= */
 
 @media (max-width: 760px) {
-  .nav-pill {
+  .universal-page .nav-pill {
     position: fixed !important;
     display: block !important;
 
     left: 3.5398vw !important;
     right: auto !important;
-
     top: max(
       14px,
       calc(env(safe-area-inset-top, 0px) + 8px)
@@ -1811,30 +1810,32 @@ className={`brand-showcase-card ${
     box-shadow: none !important;
 
     overflow: visible !important;
-    transform: none !important;
     box-sizing: border-box !important;
 
+    transform: none !important;
     z-index: 1000 !important;
   }
 
-  .nav-pill.nav-pill-hidden {
+  .universal-page .nav-pill.nav-pill-hidden {
     transform: translateY(-150%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   /*
-    Remove the desktop flex layout so each mobile item
-    can use the same exact positioning as Linktree.
+    Remove the desktop flex positioning.
+    Each mobile item is positioned independently.
   */
 
-  .nav-left,
-  .nav-actions,
-  .nav-links {
+  .universal-page .nav-left,
+  .universal-page .nav-actions,
+  .universal-page .nav-links {
     display: contents !important;
   }
 
   /* Universal logo */
 
-  .logo {
+  .universal-page .logo {
     position: absolute !important;
     display: flex !important;
 
@@ -1858,7 +1859,7 @@ className={`brand-showcase-card ${
     z-index: 5 !important;
   }
 
-  .logo img {
+  .universal-page .logo img {
     position: static !important;
     display: block !important;
 
@@ -1874,23 +1875,23 @@ className={`brand-showcase-card ${
     transform: none !important;
   }
 
-  /* Hide desktop links */
+  /* Hide desktop-only links */
 
-  .nav-links .nav-desktop-link {
+  .universal-page .nav-links .nav-desktop-link {
     display: none !important;
   }
 
   /* Shop Gift Cards */
 
-  .nav-links .nav-shop-link {
+  .universal-page .nav-links .nav-shop-link {
     position: absolute !important;
     display: flex !important;
 
-    left: 17.8vw !important;
+    left: 18.5vw !important;
     top: 50% !important;
 
-    width: 27.2vw !important;
-    height: 4.4248vw !important;
+    width: 28.5vw !important;
+    height: 6vw !important;
 
     align-items: center !important;
     justify-content: flex-start !important;
@@ -1904,10 +1905,11 @@ className={`brand-showcase-card ${
     background: transparent !important;
     color: #111111 !important;
 
-    font-size: clamp(10.5px, 3.15vw, 13px) !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(11.5px, 3.35vw, 14.5px) !important;
     font-weight: 700 !important;
     line-height: 1 !important;
-    letter-spacing: -0.04vw !important;
+    letter-spacing: -0.05vw !important;
 
     text-align: left !important;
     white-space: nowrap !important;
@@ -1917,53 +1919,56 @@ className={`brand-showcase-card ${
     z-index: 5 !important;
   }
 
-  .nav-links .nav-shop-link:hover,
-  .nav-links .nav-shop-link:focus-visible {
+  .universal-page .nav-links .nav-shop-link:hover,
+  .universal-page .nav-links .nav-shop-link:focus-visible {
     border: 0 !important;
     background: transparent !important;
     outline: none !important;
   }
 
-  /* Country pill, matching Linktree proportions */
+  /* Australia bubble */
 
-  .country-pill,
-  .country-pill:hover,
-  .country-pill:focus,
-  .country-pill:active {
+  .universal-page .country-pill,
+  .universal-page .country-pill:hover,
+  .universal-page .country-pill:focus,
+  .universal-page .country-pill:active {
     position: absolute !important;
     display: flex !important;
 
-    left: 45vw !important;
-    right: auto !important;
-    top: 50% !important;
+left: 47.5vw !important;
+right: auto !important;
+top: 50% !important;
 
-    width: 34.5133vw !important;
+width: 32vw !important;
     min-width: 0 !important;
     max-width: none !important;
+    flex: none !important;
+    flex-basis: auto !important;
 
-    height: 7.7168vw !important;
-    min-height: 24px !important;
-    max-height: 32px !important;
+    height: 8.3vw !important;
+    min-height: 27px !important;
+    max-height: 34px !important;
 
     align-items: center !important;
     justify-content: center !important;
 
     margin: 0 !important;
-    padding: 0 2.6549vw !important;
+    padding: 0 1.4vw !important;
 
     border: 0 !important;
-    border-radius: 4.7938vw !important;
+    border-radius: 999px !important;
 
     background: #115cd0 !important;
     color: #ffffff !important;
 
-    font-size: clamp(6.2px, 2.0066vw, 8px) !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(7.4px, 2.15vw, 9.4px) !important;
     font-weight: 700 !important;
     line-height: 1.02 !important;
-    letter-spacing: 0 !important;
+    letter-spacing: -0.02vw !important;
 
     text-align: center !important;
-    white-space: normal !important;
+white-space: nowrap !important;
 
     overflow: hidden !important;
     box-sizing: border-box !important;
@@ -1973,14 +1978,14 @@ className={`brand-showcase-card ${
     z-index: 8 !important;
   }
 
-  .login-btn,
-  .signup-btn {
+  .universal-page .login-btn,
+  .universal-page .signup-btn {
     display: none !important;
   }
 
-  /* Three-line menu, matching Linktree position */
+  /* Hamburger */
 
-  .mobile-menu-button {
+  .universal-page .mobile-menu-button {
     position: absolute !important;
     display: flex !important;
 
@@ -2010,7 +2015,7 @@ className={`brand-showcase-card ${
     z-index: 20 !important;
   }
 
-  .mobile-menu-button span {
+  .universal-page .mobile-menu-button span {
     display: block !important;
 
     width: 5.7522vw !important;
@@ -2027,21 +2032,27 @@ className={`brand-showcase-card ${
       opacity 180ms ease !important;
   }
 
-  .mobile-menu-button-open span:nth-child(1) {
+  .universal-page
+    .mobile-menu-button-open
+    span:nth-child(1) {
     transform: translateY(1.3274vw) rotate(45deg) !important;
   }
 
-  .mobile-menu-button-open span:nth-child(2) {
+  .universal-page
+    .mobile-menu-button-open
+    span:nth-child(2) {
     opacity: 0 !important;
   }
 
-  .mobile-menu-button-open span:nth-child(3) {
+  .universal-page
+    .mobile-menu-button-open
+    span:nth-child(3) {
     transform: translateY(-1.3274vw) rotate(-45deg) !important;
   }
 
   /* Open hamburger menu */
 
-  .mobile-nav-menu {
+  .universal-page .mobile-nav-menu {
     position: absolute !important;
     display: grid !important;
 
@@ -2062,7 +2073,7 @@ className={`brand-showcase-card ${
     z-index: 30 !important;
   }
 
-  .mobile-nav-menu button {
+  .universal-page .mobile-nav-menu button {
     display: flex !important;
 
     width: 100% !important;
@@ -2079,7 +2090,7 @@ className={`brand-showcase-card ${
     background: #f3f3f1 !important;
     color: #111111 !important;
 
-    font-family: inherit !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
     font-size: 3.5398vw !important;
     font-weight: 700 !important;
     text-align: left !important;
@@ -2087,9 +2098,41 @@ className={`brand-showcase-card ${
     cursor: pointer !important;
   }
 
-  .mobile-nav-menu .mobile-nav-signup {
+  .universal-page .mobile-nav-menu .mobile-nav-signup {
     background: #000000 !important;
     color: #ffffff !important;
+  }
+}
+  /* =========================================================
+   FINAL MOBILE NAV HORIZONTAL ALIGNMENT
+   Moves the full navigation row slightly to the right.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .universal-page .logo {
+    left: 3.8vw !important;
+  }
+
+  .universal-page .nav-links .nav-shop-link {
+    left: 19.2vw !important;
+  }
+
+  .universal-page .country-pill,
+  .universal-page .country-pill:hover,
+  .universal-page .country-pill:focus,
+  .universal-page .country-pill:active {
+    left: 49vw !important;
+  }
+
+  .universal-page .mobile-menu-button {
+    right: 3.2vw !important;
+  }
+}
+  @media (max-width: 760px) {
+  .universal-page .nav-links .nav-shop-link {
+    top: calc(50% + 0.45vw) !important;
+    align-items: center !important;
+    transform: translateY(-50%) !important;
   }
 }
       `}</style>

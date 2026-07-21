@@ -871,10 +871,10 @@ const navigateTo = (path: string) => {
             width: 100%;
           }
         }
-          /* =========================================================
-   FINAL HOW IT WORKS MOBILE NAV
-   Matches the Universal shop mobile navigation.
-   Desktop remains unchanged.
+/* =========================================================
+   FINAL UNIVERSAL HOW IT WORKS MOBILE NAV
+   Matches the approved Universal homepage navigation.
+   Desktop remains untouched.
    ========================================================= */
 
 .shop-mobile-menu-button,
@@ -883,58 +883,76 @@ const navigateTo = (path: string) => {
 }
 
 @media (max-width: 760px) {
-  .shop-nav-pill {
+  .universal-how-page {
+    padding-top: calc(
+      max(
+          14px,
+          calc(env(safe-area-inset-top, 0px) + 8px)
+        ) + 23vw
+    ) !important;
+  }
+
+  .universal-how-page .shop-nav-pill {
     position: fixed !important;
+    display: block !important;
+
     left: 3.5398vw !important;
     right: auto !important;
     top: max(
-      52px,
-      calc(env(safe-area-inset-top, 0px) + 12px)
+      14px,
+      calc(env(safe-area-inset-top, 0px) + 8px)
     ) !important;
 
     width: 92.9204vw !important;
     max-width: none !important;
-    height: 16.8142vw !important;
+    height: clamp(52px, 16.8142vw, 66px) !important;
 
     margin: 0 !important;
     padding: 0 !important;
 
     border: 1px solid #ebebeb !important;
     border-radius: 11.0619vw !important;
+
     background: #ffffff !important;
+    box-shadow: none !important;
+
+    overflow: visible !important;
+    box-sizing: border-box !important;
 
     transform: none !important;
-    box-shadow: none !important;
-    overflow: visible !important;
+    opacity: 1 !important;
+
     z-index: 1000 !important;
   }
 
-  .shop-nav-pill-hidden {
+  .universal-how-page
+    .shop-nav-pill.shop-nav-pill-hidden {
     transform: translateY(-150%) !important;
-    opacity: 1 !important;
+    opacity: 0 !important;
     pointer-events: none !important;
   }
 
-  .shop-nav-left,
-  .shop-nav-actions {
-    position: static !important;
-    display: block !important;
-    width: auto !important;
-    height: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
+  /* Remove the desktop flex positioning */
+
+  .universal-how-page .shop-nav-left,
+  .universal-how-page .shop-nav-actions,
+  .universal-how-page .shop-nav-links {
+    display: contents !important;
   }
 
   /* Universal logo */
 
-  .shop-logo {
+  .universal-how-page .shop-logo {
     position: absolute !important;
     display: flex !important;
+
     left: 3.8vw !important;
     top: 50% !important;
 
-    width: 13vw !important;
-    height: 10vw !important;
+    width: 13.8vw !important;
+    height: 9vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
     flex: none !important;
 
     align-items: center !important;
@@ -943,39 +961,48 @@ const navigateTo = (path: string) => {
     margin: 0 !important;
     padding: 0 !important;
 
+    overflow: visible !important;
     transform: translateY(-50%) !important;
+
     z-index: 5 !important;
   }
 
-  .shop-logo img {
-    display: block !important;
-    width: 13vw !important;
-    max-width: none !important;
-    height: auto !important;
-    object-fit: contain !important;
-  }
-
-  /* Shop Gift Cards label */
-
-  .shop-nav-links {
+  .universal-how-page .shop-logo img {
     position: static !important;
     display: block !important;
-    width: auto !important;
-    height: auto !important;
+
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    transform: none !important;
   }
 
-  .shop-nav-links .shop-nav-desktop-link {
+  /* Hide the desktop-only links */
+
+  .universal-how-page
+    .shop-nav-links
+    .shop-nav-desktop-link {
     display: none !important;
   }
 
-  .shop-nav-links .shop-nav-shop-link {
+  /* Shop Gift Cards */
+
+  .universal-how-page
+    .shop-nav-links
+    .shop-nav-shop-link {
     position: absolute !important;
     display: flex !important;
 
-    left: 17.8vw !important;
-    top: 50% !important;
+    left: 19.2vw !important;
+    top: calc(50% + 0.45vw) !important;
 
-    width: 26vw !important;
+    width: 28.5vw !important;
     height: 6vw !important;
 
     align-items: center !important;
@@ -986,31 +1013,56 @@ const navigateTo = (path: string) => {
 
     border: 0 !important;
     border-radius: 0 !important;
-    background: transparent !important;
 
+    background: transparent !important;
     color: #111111 !important;
-    font-size: 3.35vw !important;
+
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(11.5px, 3.35vw, 14.5px) !important;
     font-weight: 700 !important;
     line-height: 1 !important;
     letter-spacing: -0.05vw !important;
+
+    text-align: left !important;
     white-space: nowrap !important;
 
     transform: translateY(-50%) !important;
+
     z-index: 5 !important;
   }
 
-  /* Australia pill */
+  .universal-how-page
+    .shop-nav-links
+    .shop-nav-shop-link:hover,
+  .universal-how-page
+    .shop-nav-links
+    .shop-nav-shop-link:focus-visible {
+    border: 0 !important;
+    background: transparent !important;
+    outline: none !important;
+  }
 
-  .shop-country-pill {
+  /* Australia bubble */
+
+  .universal-how-page .shop-country-pill,
+  .universal-how-page .shop-country-pill:hover {
     position: absolute !important;
     display: flex !important;
 
-    left: 46.8vw !important;
+    left: 49vw !important;
+    right: auto !important;
     top: 50% !important;
 
-    width: 31.2vw !important;
-    height: 7.35vw !important;
+    width: 32vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    height: 8.3vw !important;
+    min-height: 27px !important;
+    max-height: 34px !important;
+
     flex: none !important;
+    flex-basis: auto !important;
 
     align-items: center !important;
     justify-content: center !important;
@@ -1024,42 +1076,46 @@ const navigateTo = (path: string) => {
     background: #115cd0 !important;
     color: #ffffff !important;
 
-    font-size: 1.82vw !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
+    font-size: clamp(7.4px, 2.15vw, 9.4px) !important;
     font-weight: 700 !important;
-    line-height: 0.98 !important;
-    letter-spacing: -0.015vw !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.02vw !important;
+
     text-align: center !important;
-    white-space: normal !important;
+    white-space: nowrap !important;
+
+    overflow: hidden !important;
+    box-sizing: border-box !important;
 
     transform: translateY(-50%) !important;
-    overflow: hidden !important;
+
     z-index: 8 !important;
   }
 
-  .shop-country-pill:hover {
-    background: #115cd0 !important;
-  }
-
-  .shop-login-btn,
-  .shop-signup-btn {
+  .universal-how-page .shop-login-btn,
+  .universal-how-page .shop-signup-btn {
     display: none !important;
   }
 
   /* Hamburger */
 
-  .shop-mobile-menu-button {
+  .universal-how-page .shop-mobile-menu-button {
     position: absolute !important;
     display: flex !important;
 
-    right: 4.8vw !important;
+    right: 3.2vw !important;
     top: 50% !important;
 
     width: 7.9646vw !important;
     height: 7.9646vw !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
 
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+
     gap: 0.8849vw !important;
 
     margin: 0 !important;
@@ -1069,13 +1125,19 @@ const navigateTo = (path: string) => {
     background: transparent !important;
 
     transform: translateY(-50%) !important;
+
     cursor: pointer !important;
     z-index: 20 !important;
   }
 
-  .shop-mobile-menu-button span {
+  .universal-how-page
+    .shop-mobile-menu-button
+    span {
     display: block !important;
+
     width: 5.7522vw !important;
+    max-width: 21px !important;
+
     height: 0.4425vw !important;
     min-height: 1.5px !important;
 
@@ -1087,21 +1149,27 @@ const navigateTo = (path: string) => {
       opacity 180ms ease !important;
   }
 
-  .shop-mobile-menu-button.is-open span:nth-child(1) {
+  .universal-how-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(1) {
     transform: translateY(1.3274vw) rotate(45deg) !important;
   }
 
-  .shop-mobile-menu-button.is-open span:nth-child(2) {
+  .universal-how-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(2) {
     opacity: 0 !important;
   }
 
-  .shop-mobile-menu-button.is-open span:nth-child(3) {
+  .universal-how-page
+    .shop-mobile-menu-button.is-open
+    span:nth-child(3) {
     transform: translateY(-1.3274vw) rotate(-45deg) !important;
   }
 
-  /* Mobile menu */
+  /* Open mobile menu */
 
-  .shop-mobile-nav-menu {
+  .universal-how-page .shop-mobile-nav-menu {
     position: absolute !important;
     display: grid !important;
 
@@ -1109,6 +1177,7 @@ const navigateTo = (path: string) => {
     top: calc(100% + 2.6549vw) !important;
 
     width: 56vw !important;
+
     padding: 2.6549vw !important;
     gap: 1.3274vw !important;
 
@@ -1121,32 +1190,60 @@ const navigateTo = (path: string) => {
     z-index: 30 !important;
   }
 
-  .shop-mobile-nav-menu button {
+  .universal-how-page
+    .shop-mobile-nav-menu
+    button {
     display: flex !important;
+
     width: 100% !important;
     height: 10.6195vw !important;
+    min-height: 38px !important;
 
     align-items: center !important;
 
     padding: 0 3.5398vw !important;
+
     border: 0 !important;
     border-radius: 3.0973vw !important;
 
     background: #f3f3f1 !important;
     color: #111111 !important;
 
-    font-family: inherit !important;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif !important;
     font-size: 3.5398vw !important;
     font-weight: 700 !important;
     text-align: left !important;
+
+    cursor: pointer !important;
   }
 
-  .shop-mobile-nav-menu .shop-mobile-nav-signup {
+  .universal-how-page
+    .shop-mobile-nav-menu
+    .shop-mobile-nav-signup {
     background: #000000 !important;
     color: #ffffff !important;
   }
 }
-      `}</style>
+  /* =========================================================
+   MOBILE HOW IT WORKS CONTENT POSITION
+   Moves all page content closer to the raised navigation.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .universal-how-page {
+    padding-top: calc(
+      max(
+          14px,
+          calc(env(safe-area-inset-top, 0px) + 8px)
+        ) + 24vw
+    ) !important;
+  }
+
+  .universal-how-page .faq-hero {
+    padding-top: 4vw !important;
+  }
+}
+`}</style>
     </main>
   );
 }

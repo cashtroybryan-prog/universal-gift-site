@@ -215,8 +215,9 @@ export default function UniversalHome({
   const router = useRouter();
   const [isIntroLoading, setIsIntroLoading] = useState(true);
   const [isReloadingHome, setIsReloadingHome] = useState(false);
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [isHeroSwitching, setIsHeroSwitching] = useState(false);
+const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+const [isHeroSwitching, setIsHeroSwitching] = useState(false);
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const activeSlide = heroSlides[activeSlideIndex];
 
@@ -232,17 +233,19 @@ export default function UniversalHome({
     return () => window.clearTimeout(timer);
   }, []);
 
-  const handleNavClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-    action: () => void
-  ) => {
-    event.preventDefault();
-    action();
-  };
+const handleNavClick = (
+  event: MouseEvent<HTMLAnchorElement>,
+  action: () => void
+) => {
+  event.preventDefault();
+  setMobileMenuOpen(false);
+  action();
+};
 
-  const handleHomeReload = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    setIsReloadingHome(true);
+const handleHomeReload = (event: MouseEvent<HTMLAnchorElement>) => {
+  event.preventDefault();
+  setMobileMenuOpen(false);
+  setIsReloadingHome(true);
 
     window.setTimeout(() => {
       if (window.location.pathname !== "/au/home") {
@@ -337,46 +340,108 @@ export default function UniversalHome({
               <img src={assets.logo} alt="Universal" draggable={false} />
             </a>
 
-            <div className="nav-links">
-              <a href={shopPath} onClick={(event) => handleNavClick(event, onShop)}>
-                Shop Gift Cards
-              </a>
+<div className="nav-links">
+  <a
+    className="nav-shop-link"
+    href={shopPath}
+    onClick={(event) => handleNavClick(event, onShop)}
+  >
+    Shop Gift Cards
+  </a>
 
-              <a href={howPath} onClick={(event) => handleNavClick(event, onHow)}>
-                How it Works
-              </a>
+  <a
+    className="nav-desktop-link"
+    href={howPath}
+    onClick={(event) => handleNavClick(event, onHow)}
+  >
+    How it Works
+  </a>
 
-              <a
-                href={trackerPath}
-                onClick={(event) => handleNavClick(event, onTracker)}
-              >
-                Gift Tracker
-              </a>
-            </div>
+  <a
+    className="nav-desktop-link"
+    href={trackerPath}
+    onClick={(event) => handleNavClick(event, onTracker)}
+  >
+    Gift Tracker
+  </a>
+</div>
           </div>
 
-          <div className="nav-actions">
-            <button
-              className="country-pill"
-              type="button"
-              aria-label="Shopping in Australia"
-              onClick={() =>
-                alert("Australia is the only available country for this prototype.")
-              }
-            >
-              You are currently
-              <br />
-              shopping in Australia 🇦🇺
-            </button>
+<div className="nav-actions">
+  <button
+    className="country-pill"
+    type="button"
+    aria-label="Shopping in Australia"
+    onClick={() =>
+      alert("Australia is the only available country for this prototype.")
+    }
+  >
+    You are currently
+    <br />
+    shopping in Australia 🇦🇺
+  </button>
 
-            <button className="login-btn" type="button">
-              Log in
-            </button>
+  <button className="login-btn" type="button">
+    Log in
+  </button>
 
-            <button className="signup-btn" type="button">
-              Sign up
-            </button>
-          </div>
+  <button className="signup-btn" type="button">
+    Sign up
+  </button>
+
+  <button
+    className={`mobile-menu-button ${
+      mobileMenuOpen ? "mobile-menu-button-open" : ""
+    }`}
+    type="button"
+    aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+    aria-expanded={mobileMenuOpen}
+    onClick={() => setMobileMenuOpen((previous) => !previous)}
+  >
+    <span />
+    <span />
+    <span />
+  </button>
+</div>
+
+{mobileMenuOpen && (
+  <div className="mobile-nav-menu">
+    <button
+      type="button"
+      onClick={() => {
+        setMobileMenuOpen(false);
+        onHow();
+      }}
+    >
+      How it Works
+    </button>
+
+    <button
+      type="button"
+      onClick={() => {
+        setMobileMenuOpen(false);
+        onTracker();
+      }}
+    >
+      Gift Tracker
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setMobileMenuOpen(false)}
+    >
+      Log in
+    </button>
+
+    <button
+      className="mobile-nav-signup"
+      type="button"
+      onClick={() => setMobileMenuOpen(false)}
+    >
+      Sign up free
+    </button>
+  </div>
+)}
         </nav>
       </section>
 
@@ -1708,6 +1773,325 @@ className={`brand-showcase-card ${
             font-size: 25px;
           }
         }
+          .mobile-menu-button,
+.mobile-nav-menu {
+  display: none;
+}
+
+/* =========================================================
+   FINAL UNIVERSAL MOBILE NAV
+   Uses the same spacing proportions as the Linktree nav.
+   Desktop remains untouched.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .nav-pill {
+    position: fixed !important;
+    display: block !important;
+
+    left: 3.5398vw !important;
+    right: auto !important;
+
+    top: max(
+      14px,
+      calc(env(safe-area-inset-top, 0px) + 8px)
+    ) !important;
+
+    width: 92.9204vw !important;
+    max-width: none !important;
+    height: clamp(52px, 16.8142vw, 66px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 11.0619vw !important;
+
+    background: #ffffff !important;
+    box-shadow: none !important;
+
+    overflow: visible !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+
+    z-index: 1000 !important;
+  }
+
+  .nav-pill.nav-pill-hidden {
+    transform: translateY(-150%) !important;
+  }
+
+  /*
+    Remove the desktop flex layout so each mobile item
+    can use the same exact positioning as Linktree.
+  */
+
+  .nav-left,
+  .nav-actions,
+  .nav-links {
+    display: contents !important;
+  }
+
+  /* Universal logo */
+
+  .logo {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 2.4vw !important;
+    top: 50% !important;
+
+    width: 13.8vw !important;
+    height: 9vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: visible !important;
+    transform: translateY(-50%) !important;
+
+    z-index: 5 !important;
+  }
+
+  .logo img {
+    position: static !important;
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    transform: none !important;
+  }
+
+  /* Hide desktop links */
+
+  .nav-links .nav-desktop-link {
+    display: none !important;
+  }
+
+  /* Shop Gift Cards */
+
+  .nav-links .nav-shop-link {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 17.8vw !important;
+    top: 50% !important;
+
+    width: 27.2vw !important;
+    height: 4.4248vw !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    color: #111111 !important;
+
+    font-size: clamp(10.5px, 3.15vw, 13px) !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.04vw !important;
+
+    text-align: left !important;
+    white-space: nowrap !important;
+
+    transform: translateY(-50%) !important;
+
+    z-index: 5 !important;
+  }
+
+  .nav-links .nav-shop-link:hover,
+  .nav-links .nav-shop-link:focus-visible {
+    border: 0 !important;
+    background: transparent !important;
+    outline: none !important;
+  }
+
+  /* Country pill, matching Linktree proportions */
+
+  .country-pill,
+  .country-pill:hover,
+  .country-pill:focus,
+  .country-pill:active {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 45vw !important;
+    right: auto !important;
+    top: 50% !important;
+
+    width: 34.5133vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    height: 7.7168vw !important;
+    min-height: 24px !important;
+    max-height: 32px !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 2.6549vw !important;
+
+    border: 0 !important;
+    border-radius: 4.7938vw !important;
+
+    background: #115cd0 !important;
+    color: #ffffff !important;
+
+    font-size: clamp(6.2px, 2.0066vw, 8px) !important;
+    font-weight: 700 !important;
+    line-height: 1.02 !important;
+    letter-spacing: 0 !important;
+
+    text-align: center !important;
+    white-space: normal !important;
+
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+
+    transform: translateY(-50%) !important;
+
+    z-index: 8 !important;
+  }
+
+  .login-btn,
+  .signup-btn {
+    display: none !important;
+  }
+
+  /* Three-line menu, matching Linktree position */
+
+  .mobile-menu-button {
+    position: absolute !important;
+    display: flex !important;
+
+    right: 4.8673vw !important;
+    top: 50% !important;
+
+    width: 7.9646vw !important;
+    height: 7.9646vw !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 0.8849vw !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    background: transparent !important;
+
+    transform: translateY(-50%) !important;
+
+    cursor: pointer !important;
+    z-index: 20 !important;
+  }
+
+  .mobile-menu-button span {
+    display: block !important;
+
+    width: 5.7522vw !important;
+    max-width: 21px !important;
+
+    height: 0.4425vw !important;
+    min-height: 1.5px !important;
+
+    border-radius: 999px !important;
+    background: #111111 !important;
+
+    transition:
+      transform 180ms ease,
+      opacity 180ms ease !important;
+  }
+
+  .mobile-menu-button-open span:nth-child(1) {
+    transform: translateY(1.3274vw) rotate(45deg) !important;
+  }
+
+  .mobile-menu-button-open span:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .mobile-menu-button-open span:nth-child(3) {
+    transform: translateY(-1.3274vw) rotate(-45deg) !important;
+  }
+
+  /* Open hamburger menu */
+
+  .mobile-nav-menu {
+    position: absolute !important;
+    display: grid !important;
+
+    right: 0 !important;
+    top: calc(100% + 2.6549vw) !important;
+
+    width: 56vw !important;
+
+    padding: 2.6549vw !important;
+    gap: 1.3274vw !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 4.4248vw !important;
+
+    background: #ffffff !important;
+    box-shadow: 0 4vw 10vw rgba(0, 0, 0, 0.14) !important;
+
+    z-index: 30 !important;
+  }
+
+  .mobile-nav-menu button {
+    display: flex !important;
+
+    width: 100% !important;
+    height: 10.6195vw !important;
+    min-height: 38px !important;
+
+    align-items: center !important;
+
+    padding: 0 3.5398vw !important;
+
+    border: 0 !important;
+    border-radius: 3.0973vw !important;
+
+    background: #f3f3f1 !important;
+    color: #111111 !important;
+
+    font-family: inherit !important;
+    font-size: 3.5398vw !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+
+    cursor: pointer !important;
+  }
+
+  .mobile-nav-menu .mobile-nav-signup {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+}
       `}</style>
     </main>
   );

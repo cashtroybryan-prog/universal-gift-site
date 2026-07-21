@@ -153,47 +153,49 @@ const handleContinue = () => {
         </section>
 
         <section className="recipient-column">
-          <div className="gift-value-row">
-            <h2>Gift value</h2>
+<div className="gift-value-row">
+  <h2>Gift value</h2>
 
-            <div className="amount-control">
-              <button
-                type="button"
-                className="amount-pill"
-                onClick={() => setAmountOpen((current) => !current)}
-              >
-                {formatAmount(selectedAmount)}
-              </button>
+  <div className="amount-control">
+    <button
+      type="button"
+      className="amount-pill"
+      onClick={() => setAmountOpen((current) => !current)}
+    >
+      {formatAmount(selectedAmount)}
+    </button>
 
-              <button
-                type="button"
-                className={`amount-chevron ${amountOpen ? "is-open" : ""}`}
-                onClick={() => setAmountOpen((current) => !current)}
-                aria-label="Change gift value"
-              >
-                <span aria-hidden="true" />
-              </button>
+    <button
+      type="button"
+      className={`amount-chevron ${amountOpen ? "is-open" : ""}`}
+      onClick={() => setAmountOpen((current) => !current)}
+      aria-label="Change gift value"
+      aria-expanded={amountOpen}
+    >
+      <span aria-hidden="true" />
+    </button>
+  </div>
+</div>
 
-              {amountOpen && (
-                <div className="amount-menu">
-                  {amounts.map((amount) => (
-                    <button
-                      key={amount}
-                      type="button"
-                      className={amount === selectedAmount ? "is-selected" : ""}
-                      onClick={() => {
-                        setSelectedAmount(amount);
-                        setAmountOpen(false);
-                      }}
-                    >
-                      {formatAmount(amount)}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+{amountOpen && (
+  <div className="amount-menu">
+    {amounts.map((amount) => (
+      <button
+        key={amount}
+        type="button"
+        className={amount === selectedAmount ? "is-selected" : ""}
+        onClick={() => {
+          setSelectedAmount(amount);
+          setAmountOpen(false);
+        }}
+      >
+        {formatAmount(amount)}
+      </button>
+    ))}
+  </div>
+)}
 
+<div className="recipient-divider" />
           <div className="recipient-divider" />
 
           <h3 className="recipient-heading">Who is this gift for?</h3>
@@ -238,13 +240,23 @@ const handleContinue = () => {
                   aria-label="Recipient email"
                 />
 
-                <input
-                  value={recipientPhone}
-                  onChange={(event) => setRecipientPhone(event.target.value)}
-                  placeholder="Recipient Australian phone number"
-                  inputMode="tel"
-                  aria-label="Recipient Australian phone number"
-                />
+<input
+  className="recipient-phone-desktop"
+  value={recipientPhone}
+  onChange={(event) => setRecipientPhone(event.target.value)}
+  placeholder="Recipient Australian phone number"
+  inputMode="tel"
+  aria-label="Recipient Australian phone number"
+/>
+
+<input
+  className="recipient-phone-mobile"
+  value={recipientPhone}
+  onChange={(event) => setRecipientPhone(event.target.value)}
+  placeholder="Recipient Australian phone no."
+  inputMode="tel"
+  aria-label="Recipient Australian phone number"
+/>
 
                 <p>
                   Enter a valid recipient email or Australian phone number so we know
@@ -777,6 +789,378 @@ const handleContinue = () => {
             grid-template-columns: repeat(2, 1fr);
           }
         }
+          /* =========================================================
+   FINAL MOBILE UNIVERSAL RECIPIENT PAGE
+   Desktop remains untouched.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .universal-recipient-page {
+    width: 100% !important;
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
+    background: #f3f3f1 !important;
+  }
+
+  .recipient-frame {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 100dvh !important;
+    margin: 0 !important;
+    padding: 18px 14px 36px !important;
+    background: #f3f3f1 !important;
+    transform: none !important;
+  }
+
+  /* TOP BUTTONS */
+
+  .recipient-back {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    display: inline-flex !important;
+    min-height: 40px !important;
+    align-items: center !important;
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #8e8e8e !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+
+  .recipient-close {
+    position: absolute !important;
+    right: 14px !important;
+    top: 14px !important;
+    display: flex !important;
+    width: 38px !important;
+    height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 0 3px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #e2e2df !important;
+    color: #000000 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    z-index: 20 !important;
+  }
+
+  /* PRODUCT INFORMATION */
+
+  .product-info-column {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    display: flex !important;
+    width: 100% !important;
+    align-items: flex-start !important;
+  }
+
+  .product-info-image-wrap {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1.62 / 1 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border-radius: 22px !important;
+    background: #ffffff !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.13) !important;
+  }
+
+  .product-info-image-wrap img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .product-info-title {
+    width: 100% !important;
+    margin: 20px 0 0 !important;
+    color: #000000 !important;
+    font-size: 30px !important;
+    font-weight: 700 !important;
+    line-height: 0.96 !important;
+    letter-spacing: -1px !important;
+  }
+
+  .product-info-copy {
+    width: 100% !important;
+    margin: 16px 0 0 !important;
+    color: #000000 !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.2px !important;
+  }
+
+  .product-info-link {
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 22px 0 0 !important;
+    color: #115cd0 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+  }
+
+  .product-info-expiry {
+    width: 100% !important;
+    margin: 24px 0 0 !important;
+    color: #000000 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+
+  /* RECIPIENT SECTION */
+
+  .recipient-column {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    margin: 32px 0 0 !important;
+  }
+
+  .gift-value-row {
+    position: relative !important;
+    display: flex !important;
+    width: 100% !important;
+    height: 70px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 !important;
+    border-top: 1px solid #d8d8d5 !important;
+    border-bottom: 1px solid #d8d8d5 !important;
+  }
+
+  .gift-value-row h2 {
+    margin: 0 !important;
+    color: #000000 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 0.95 !important;
+    letter-spacing: -0.6px !important;
+  }
+
+.amount-control {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1px !important;
+}
+
+  .amount-pill {
+    display: flex !important;
+    min-width: 118px !important;
+    width: auto !important;
+    height: 48px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 18px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #115cd0 !important;
+    color: #ffffff !important;
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+
+.amount-chevron {
+  display: flex !important;
+  width: 30px !important;
+  height: 42px !important;
+      align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .amount-chevron span {
+    display: block !important;
+    width: 14px !important;
+    height: 14px !important;
+    border-right: 5px solid #115cd0 !important;
+    border-bottom: 5px solid #115cd0 !important;
+    border-radius: 1px !important;
+    transform: translateY(-3px) rotate(45deg) !important;
+  }
+
+  .amount-chevron.is-open span {
+    transform: translateY(3px) rotate(225deg) !important;
+  }
+
+  .recipient-divider {
+    display: none !important;
+  }
+
+/* INLINE MOBILE AMOUNT MENU */
+
+.amount-menu {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  z-index: 30 !important;
+
+  display: grid !important;
+  width: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px 9px !important;
+
+  margin: 12px 0 0 !important;
+  padding: 13px 12px !important;
+
+  overflow: visible !important;
+
+  border: 0 !important;
+  border-radius: 20px !important;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 4px 7px rgba(0, 0, 0, 0.05),
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    0 22px 46px rgba(0, 0, 0, 0.1) !important;
+
+  transform: none !important;
+}
+
+.amount-menu button {
+  display: flex !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 42px !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  margin: 0 !important;
+  padding: 0 5px !important;
+
+  border: 0 !important;
+  border-radius: 999px !important;
+
+  background: #000000 !important;
+  color: #ffffff !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.1px !important;
+
+  text-align: center !important;
+  white-space: nowrap !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.amount-menu button.is-selected {
+  background: #115cd0 !important;
+  color: #ffffff !important;
+
+  box-shadow:
+    0 5px 12px rgba(17, 92, 208, 0.2),
+    0 9px 22px rgba(17, 92, 208, 0.18) !important;
+}
+
+.amount-menu + .recipient-heading {
+  margin-top: 24px !important;
+}
+    /* =========================================================
+   MOBILE PRODUCT INFO CENTRING
+   Desktop remains untouched.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .universal-recipient-page .product-info-column {
+    display: flex !important;
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .universal-recipient-page .product-info-image-wrap {
+    width: 64vw !important;
+    max-width: 280px !important;
+    height: 38.4vw !important;
+    max-height: 168px !important;
+    aspect-ratio: auto !important;
+    margin: 0 auto !important;
+    border-radius: 18px !important;
+  }
+
+  .universal-recipient-page .product-info-title {
+    width: 88vw !important;
+    max-width: 340px !important;
+    margin: 22px auto 0 !important;
+    text-align: center !important;
+    font-size: 27px !important;
+    line-height: 0.98 !important;
+  }
+
+  .universal-recipient-page .product-info-copy {
+    width: 86vw !important;
+    max-width: 340px !important;
+    margin: 15px auto 0 !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+  }
+
+  .universal-recipient-page .product-info-link {
+    width: auto !important;
+    max-width: 86vw !important;
+    margin: 20px auto 0 !important;
+    text-align: center !important;
+    font-size: 17px !important;
+  }
+
+  .universal-recipient-page .product-info-expiry {
+    width: auto !important;
+    margin: 22px auto 0 !important;
+    text-align: center !important;
+    font-size: 23px !important;
+  }
+
+  .universal-recipient-page .recipient-column {
+    margin-top: 30px !important;
+  }
+}
+  @media (max-width: 760px) {
+  .universal-recipient-page .recipient-continue {
+    font-size: 28px !important;
+  }
+}
+  .recipient-phone-mobile {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .recipient-phone-desktop {
+    display: none !important;
+  }
+
+  .recipient-phone-mobile {
+    display: block !important;
+  }
+}
       `}</style>
     </main>
   );

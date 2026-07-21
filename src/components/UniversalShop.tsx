@@ -66,8 +66,9 @@ export default function UniversalShop({
     UniversalShopCardId[]
   >([]);
   const [sortMode, setSortMode] = useState<SortMode>("featured");
-  const [categoryOpen, setCategoryOpen] = useState(false);
-  const [sortOpen, setSortOpen] = useState(false);
+const [categoryOpen, setCategoryOpen] = useState(false);
+const [sortOpen, setSortOpen] = useState(false);
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const categoryLabel =
     selectedCategories.length === 0
@@ -116,18 +117,20 @@ export default function UniversalShop({
     );
   };
 
-  const handleNavClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-    action: () => void
-  ) => {
-    event.preventDefault();
-    action();
-  };
+const handleNavClick = (
+  event: MouseEvent<HTMLAnchorElement>,
+  action: () => void
+) => {
+  event.preventDefault();
+  setMobileMenuOpen(false);
+  action();
+};
 
-  const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    router.push("/au/home");
-  };
+const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
+  event.preventDefault();
+  setMobileMenuOpen(false);
+  router.push("/au/home");
+};
 
   const handleCardClick = (cardId: UniversalShopCardId) => {
     if (onCardSelect) {
@@ -146,50 +149,112 @@ export default function UniversalShop({
     setSortOpen(false);
   }}
 >      <nav className={`shop-nav-pill ${navHidden ? "shop-nav-pill-hidden" : ""}`}>
-        <div className="shop-nav-left">
-          <a
-            className="shop-logo"
-            href="/au/home"
-            aria-label="Universal home"
-            onClick={handleHomeClick}
-          >
-            <img src={assets.logo} alt="Universal" draggable={false} />
-          </a>
+  <div className="shop-nav-left">
+    <a
+      className="shop-logo"
+      href="/au/home"
+      aria-label="Universal home"
+      onClick={handleHomeClick}
+    >
+      <img src={assets.logo} alt="Universal" draggable={false} />
+    </a>
 
-          <div className="shop-nav-links">
-            <a href={shopPath} onClick={(event) => handleNavClick(event, onShop)}>
-              Shop Gift Cards
-            </a>
+    <div className="shop-nav-links">
+      <a
+        className="shop-nav-shop-link"
+        href={shopPath}
+        onClick={(event) => handleNavClick(event, onShop)}
+      >
+        Shop Gift Cards
+      </a>
 
-            <a href={howPath} onClick={(event) => handleNavClick(event, onHow)}>
-              How it Works
-            </a>
+      <a
+        className="shop-nav-desktop-link"
+        href={howPath}
+        onClick={(event) => handleNavClick(event, onHow)}
+      >
+        How it Works
+      </a>
 
-            <a
-              href={trackerPath}
-              onClick={(event) => handleNavClick(event, onTracker)}
-            >
-              Gift Tracker
-            </a>
-          </div>
-        </div>
+      <a
+        className="shop-nav-desktop-link"
+        href={trackerPath}
+        onClick={(event) => handleNavClick(event, onTracker)}
+      >
+        Gift Tracker
+      </a>
+    </div>
+  </div>
 
-        <div className="shop-nav-actions">
-          <div className="shop-country-pill" aria-label="Shopping in Australia">
-            You are currently
-            <br />
-            shopping in Australia 🇦🇺
-          </div>
+  <div className="shop-nav-actions">
+    <div className="shop-country-pill" aria-label="Shopping in Australia">
+      You are currently
+      <br />
+      shopping in Australia 🇦🇺
+    </div>
 
-          <button className="shop-login-btn" type="button">
-            Log in
-          </button>
+    <button className="shop-login-btn" type="button">
+      Log in
+    </button>
 
-          <button className="shop-signup-btn" type="button">
-            Sign up
-          </button>
-        </div>
-      </nav>
+    <button className="shop-signup-btn" type="button">
+      Sign up
+    </button>
+
+    <button
+      className={`shop-mobile-menu-button ${
+        mobileMenuOpen ? "is-open" : ""
+      }`}
+      type="button"
+      aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+      aria-expanded={mobileMenuOpen}
+      onClick={() => setMobileMenuOpen((current) => !current)}
+    >
+      <span />
+      <span />
+      <span />
+    </button>
+  </div>
+
+  {mobileMenuOpen && (
+    <div className="shop-mobile-nav-menu">
+      <button
+        type="button"
+        onClick={() => {
+          setMobileMenuOpen(false);
+          onHow();
+        }}
+      >
+        How it Works
+      </button>
+
+      <button
+        type="button"
+        onClick={() => {
+          setMobileMenuOpen(false);
+          onTracker();
+        }}
+      >
+        Gift Tracker
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Log in
+      </button>
+
+      <button
+        className="shop-mobile-nav-signup"
+        type="button"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Sign up free
+      </button>
+    </div>
+  )}
+</nav>
 
       <section className="shop-hero">
         <video
@@ -210,16 +275,54 @@ export default function UniversalShop({
       </section>
 
       <section className="shop-tools" aria-label="Shop filters">
-        <label className="shop-search" aria-label="Search gift cards">
-          <span className="shop-search-icon" aria-hidden="true" />
+<label className="shop-search" aria-label="Search gift cards">
+  <svg
+    className="shop-search-icon"
+    viewBox="0 0 32 32"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle
+      cx="13"
+      cy="13"
+      r="8.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.7"
+    />
 
-          <input
-            type="search"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-            placeholder="Search for a gift card"
-          />
-        </label>
+    {/* Original desktop handle */}
+    <line
+      className="shop-search-handle-desktop"
+      x1="19.2"
+      y1="19.2"
+      x2="27"
+      y2="27"
+      stroke="currentColor"
+      strokeWidth="2.7"
+      strokeLinecap="round"
+    />
+
+    {/* Mobile handle overlaps the circle so there is never a gap */}
+<line
+  className="shop-search-handle-mobile"
+  x1="18.9"
+  y1="19.6"
+  x2="27"
+  y2="27.7"
+  stroke="currentColor"
+  strokeWidth="2.7"
+  strokeLinecap="round"
+/>
+  </svg>
+
+  <input
+    type="search"
+    value={searchTerm}
+    onChange={(event) => setSearchTerm(event.target.value)}
+    placeholder="Search for a gift card"
+  />
+</label>
 
 <div
   className="shop-dropdown"
@@ -1163,6 +1266,829 @@ export default function UniversalShop({
             font-size: 25px;
           }
         }
+          /* =========================================================
+   FINAL UNIVERSAL SHOP MOBILE
+   Two cards per row and homepage-style mobile navigation.
+   Desktop remains untouched.
+   ========================================================= */
+
+.shop-mobile-menu-button,
+.shop-mobile-nav-menu {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .universal-shop-page {
+    width: 100% !important;
+    min-height: 100dvh !important;
+    padding:
+      calc(
+        max(
+            52px,
+            calc(env(safe-area-inset-top, 0px) + 12px)
+          ) + 23vw
+      )
+      0
+      16vw !important;
+    overflow-x: hidden !important;
+  }
+
+  /* MOBILE WHITE NAV */
+
+  .shop-nav-pill {
+    position: fixed !important;
+    left: 3.5398vw !important;
+    right: auto !important;
+    top: max(
+      52px,
+      calc(env(safe-area-inset-top, 0px) + 12px)
+    ) !important;
+
+    width: 92.9204vw !important;
+    max-width: none !important;
+    height: 16.8142vw !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 11.0619vw !important;
+    background: #ffffff !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    z-index: 1000 !important;
+  }
+
+  .shop-nav-pill-hidden {
+    transform: translateY(-150%) !important;
+    opacity: 1 !important;
+  }
+
+  .shop-nav-left,
+  .shop-nav-actions {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Universal logo */
+
+  .shop-logo {
+    position: absolute !important;
+    display: flex !important;
+    left: 3.8vw !important;
+    top: 50% !important;
+
+    width: 13vw !important;
+    height: 10vw !important;
+    flex: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+
+    transform: translateY(-50%) !important;
+    z-index: 5 !important;
+  }
+
+  .shop-logo img {
+    display: block !important;
+    width: 13vw !important;
+    max-width: none !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+
+  /* Shop Gift Cards */
+
+  .shop-nav-links {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .shop-nav-links .shop-nav-desktop-link {
+    display: none !important;
+  }
+
+  .shop-nav-links .shop-nav-shop-link {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 17.8vw !important;
+    top: 50% !important;
+
+    width: 26vw !important;
+    height: 6vw !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+
+    color: #111111 !important;
+    font-size: 3.35vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.05vw !important;
+    white-space: nowrap !important;
+
+    transform: translateY(-50%) !important;
+    z-index: 5 !important;
+  }
+
+  /* Blue country pill */
+
+  .shop-country-pill {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 46.8vw !important;
+    top: 50% !important;
+
+    width: 31.2vw !important;
+    height: 7.35vw !important;
+    flex: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 1.4vw !important;
+
+    border: 0 !important;
+    border-radius: 999px !important;
+
+    background: #115cd0 !important;
+    color: #ffffff !important;
+
+    font-size: 1.82vw !important;
+    font-weight: 700 !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.015vw !important;
+    text-align: center !important;
+    white-space: normal !important;
+
+    transform: translateY(-50%) !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    z-index: 8 !important;
+  }
+
+  .shop-country-pill:hover {
+    background: #115cd0 !important;
+  }
+
+  .shop-login-btn,
+  .shop-signup-btn {
+    display: none !important;
+  }
+
+  /* Hamburger */
+
+  .shop-mobile-menu-button {
+    position: absolute !important;
+    display: flex !important;
+
+    right: 4.8vw !important;
+    top: 50% !important;
+
+    width: 7.9646vw !important;
+    height: 7.9646vw !important;
+
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.8849vw !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    background: transparent !important;
+
+    transform: translateY(-50%) !important;
+    cursor: pointer !important;
+    z-index: 20 !important;
+  }
+
+  .shop-mobile-menu-button span {
+    display: block !important;
+    width: 5.7522vw !important;
+    height: 0.4425vw !important;
+    min-height: 1.5px !important;
+
+    border-radius: 999px !important;
+    background: #111111 !important;
+
+    transition:
+      transform 180ms ease,
+      opacity 180ms ease !important;
+  }
+
+  .shop-mobile-menu-button.is-open span:nth-child(1) {
+    transform: translateY(1.3274vw) rotate(45deg) !important;
+  }
+
+  .shop-mobile-menu-button.is-open span:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .shop-mobile-menu-button.is-open span:nth-child(3) {
+    transform: translateY(-1.3274vw) rotate(-45deg) !important;
+  }
+
+  /* Mobile dropdown menu */
+
+  .shop-mobile-nav-menu {
+    position: absolute !important;
+    display: grid !important;
+
+    right: 0 !important;
+    top: calc(100% + 2.6549vw) !important;
+
+    width: 56vw !important;
+    padding: 2.6549vw !important;
+    gap: 1.3274vw !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 4.4248vw !important;
+
+    background: #ffffff !important;
+    box-shadow: 0 4vw 10vw rgba(0, 0, 0, 0.14) !important;
+
+    z-index: 30 !important;
+  }
+
+  .shop-mobile-nav-menu button {
+    display: flex !important;
+    width: 100% !important;
+    height: 10.6195vw !important;
+
+    align-items: center !important;
+
+    padding: 0 3.5398vw !important;
+    border: 0 !important;
+    border-radius: 3.0973vw !important;
+
+    background: #f3f3f1 !important;
+    color: #111111 !important;
+
+    font-family: inherit !important;
+    font-size: 3.5398vw !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+  }
+
+  .shop-mobile-nav-menu .shop-mobile-nav-signup {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* HERO */
+
+  .shop-hero {
+    width: 92vw !important;
+    height: 70vw !important;
+    margin: 0 auto !important;
+
+    border-radius: 7vw !important;
+    box-shadow: 0 5vw 14vw rgba(0, 0, 0, 0.17) !important;
+  }
+
+  .shop-hero-video {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  .shop-hero-content {
+    left: 6vw !important;
+    bottom: 6vw !important;
+
+    width: 78vw !important;
+  }
+
+  .shop-hero-content p {
+    margin: 0 0 2.5vw !important;
+
+    font-size: 3.8vw !important;
+    font-weight: 700 !important;
+  }
+
+  .shop-hero-content h1 {
+    font-size: 7.5vw !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.22vw !important;
+  }
+
+  /* SEARCH AND FILTERS */
+
+  .shop-tools {
+    display: flex !important;
+    width: 92vw !important;
+
+    flex-direction: column !important;
+    gap: 3vw !important;
+
+    margin: 7vw auto 0 !important;
+  }
+
+  .shop-dropdown-small {
+    display: block !important;
+  }
+
+  .shop-search,
+  .shop-dropdown-trigger {
+    width: 100% !important;
+    height: 13.5vw !important;
+
+    padding: 0 5vw !important;
+
+    border-radius: 999px !important;
+
+    font-size: 4vw !important;
+    box-shadow: 0 3vw 8vw rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .shop-search {
+    gap: 4vw !important;
+  }
+
+  .shop-search input {
+    min-width: 0 !important;
+    height: 10vw !important;
+
+    font-size: 16px !important;
+    line-height: 10vw !important;
+    transform: none !important;
+  }
+
+  .shop-search input::placeholder {
+    font-size: 16px !important;
+  }
+
+  .shop-search-icon {
+    width: 6vw !important;
+    height: 6vw !important;
+
+    border-width: 0.8vw !important;
+  }
+
+  .shop-search-icon::after {
+    width: 3vw !important;
+    height: 0.8vw !important;
+
+    right: -2.2vw !important;
+    bottom: -1.5vw !important;
+  }
+
+  .shop-dropdown-menu {
+    position: relative !important;
+
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+
+    width: 100% !important;
+
+    margin: 3vw 0 0 !important;
+    padding: 4vw !important;
+
+    border-radius: 5vw !important;
+  }
+
+  .shop-category-option {
+    height: 11vw !important;
+    padding: 0 3vw !important;
+    gap: 3vw !important;
+
+    border-radius: 3vw !important;
+
+    font-size: 4vw !important;
+  }
+
+  .shop-checkbox {
+    width: 5vw !important;
+    height: 5vw !important;
+
+    border-width: 0.4vw !important;
+    border-radius: 1vw !important;
+
+    font-size: 3.2vw !important;
+  }
+
+  .shop-clear-btn {
+    height: 12vw !important;
+    margin-top: 3vw !important;
+
+    font-size: 4vw !important;
+  }
+
+  .shop-sort-menu {
+    width: 100% !important;
+  }
+
+  .shop-sort-menu button {
+    height: 11vw !important;
+    padding: 0 4vw !important;
+
+    border-radius: 3vw !important;
+
+    font-size: 4vw !important;
+  }
+
+  .shop-chevron {
+    width: 3vw !important;
+    height: 3vw !important;
+
+    border-right-width: 1vw !important;
+    border-bottom-width: 1vw !important;
+
+    transform: translateY(-0.8vw) rotate(45deg) !important;
+  }
+
+  .shop-chevron-open {
+    transform: translateY(0.8vw) rotate(225deg) !important;
+  }
+
+  /* CONTENT */
+
+  .shop-content {
+    width: 92vw !important;
+    margin: 9vw auto 0 !important;
+  }
+
+  .shop-heading h2 {
+    font-size: 7.6vw !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.25vw !important;
+  }
+
+  .shop-heading p {
+    width: 100% !important;
+    margin: 3.5vw 0 0 !important;
+
+    font-size: 4vw !important;
+    line-height: 1.22 !important;
+    letter-spacing: -0.06vw !important;
+    white-space: normal !important;
+  }
+
+  /* TWO GIFT CARDS PER ROW */
+
+  .shop-card-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+    width: 100% !important;
+
+    column-gap: 3.5vw !important;
+    row-gap: 5vw !important;
+
+    margin-top: 7vw !important;
+  }
+
+  .shop-gift-card {
+    width: 100% !important;
+    min-width: 0 !important;
+
+    border-radius: 4.2vw !important;
+
+    box-shadow: 0 3vw 8vw rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .shop-gift-card:hover,
+  .shop-gift-card:focus-visible {
+    transform: none !important;
+    box-shadow: 0 3vw 8vw rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .shop-card-image-wrap {
+    width: 100% !important;
+    aspect-ratio: 1.62 / 1 !important;
+
+    border-radius: 4.2vw 4.2vw 0 0 !important;
+  }
+
+  .shop-card-image-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .shop-card-body {
+    min-height: 22vw !important;
+
+    padding: 3.4vw 3.2vw 3.8vw !important;
+  }
+
+  .shop-card-body h3 {
+    margin: 0 !important;
+
+    font-size: 3.65vw !important;
+    font-weight: 700 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.08vw !important;
+
+    white-space: pre-line !important;
+  }
+
+  .shop-card-body p {
+    margin: 2.5vw 0 0 !important;
+
+    font-size: 3vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+}
+/* =========================================================
+   FINAL SEARCH ALIGNMENT
+   Uses a real SVG so the handle always stays attached.
+   ========================================================= */
+
+.shop-search {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 38px minmax(0, 1fr) !important;
+  align-items: center !important;
+  column-gap: 18px !important;
+
+  width: 100% !important;
+  padding: 0 30px !important;
+
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.shop-search-icon {
+  position: static !important;
+  display: block !important;
+
+  width: 38px !important;
+  height: 38px !important;
+
+  color: #050505 !important;
+
+  border: 0 !important;
+  background: transparent !important;
+
+  transform: none !important;
+  pointer-events: none !important;
+  overflow: visible !important;
+}
+
+/* Disable all previous CSS-drawn icon parts */
+
+.shop-search-icon::before,
+.shop-search-icon::after {
+  content: none !important;
+  display: none !important;
+}
+
+.shop-search input {
+  position: static !important;
+  display: block !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+
+  color: #000000 !important;
+  font-family: inherit !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  line-height: normal !important;
+
+  transform: none !important;
+  box-sizing: border-box !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.shop-search input::placeholder {
+  color: #8f8f8f !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 760px) {
+  .shop-search {
+    grid-template-columns: 31px minmax(0, 1fr) !important;
+    column-gap: 12px !important;
+    padding: 0 18px !important;
+  }
+
+  .shop-search-icon {
+    width: 31px !important;
+    height: 31px !important;
+  }
+
+  .shop-search input {
+    height: 100% !important;
+    font-size: 16px !important;
+    line-height: normal !important;
+  }
+
+  .shop-search input::placeholder {
+    font-size: 16px !important;
+  }
+}
+    /* =========================================================
+   FINAL MOBILE UNIVERSAL CARD CLEANUP
+   Desktop remains unchanged.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  /* Remove the forced title newline on mobile only */
+
+  .shop-card-body h3 {
+    min-height: 2.15em !important;
+    margin: 0 !important;
+
+    font-size: 3.4vw !important;
+    font-weight: 700 !important;
+    line-height: 1.075 !important;
+    letter-spacing: -0.06vw !important;
+
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  .shop-card-body {
+    min-height: 20vw !important;
+    padding: 3.2vw 3.2vw 3.6vw !important;
+  }
+
+  .shop-card-body p {
+    margin-top: 2.2vw !important;
+  }
+
+  /* Remove the white space inside the merch image on mobile only */
+
+  .shop-gift-card-merch .shop-card-image-wrap {
+    background: #ffffff !important;
+  }
+
+  .shop-gift-card-merch .shop-card-image-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    transform: scale(1.16) translateY(-1.5%) !important;
+    transform-origin: center center !important;
+  }
+}
+/* =========================================================
+   FINAL MOBILE SEARCH ICON
+   Desktop remains completely unchanged.
+   ========================================================= */
+
+.shop-search-handle-mobile {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .shop-search {
+    display: grid !important;
+    grid-template-columns: 31px minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 10px !important;
+
+    padding: 0 18px !important;
+  }
+
+  .shop-search-icon {
+    position: static !important;
+    display: block !important;
+
+    width: 31px !important;
+    height: 31px !important;
+    min-width: 31px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #050505 !important;
+    border: 0 !important;
+    background: transparent !important;
+
+    transform: none !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+  }
+
+  .shop-search-icon::before,
+  .shop-search-icon::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .shop-search-handle-desktop {
+    display: none;
+  }
+
+  .shop-search-handle-mobile {
+    display: block;
+  }
+
+  .shop-search input {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 16px !important;
+    line-height: normal !important;
+
+    transform: none !important;
+  }
+}
+  /* FINAL MOBILE SEARCH TEXT CENTRING */
+
+@media (max-width: 760px) {
+  .shop-search {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 0 18px !important;
+  }
+
+  .shop-search-icon {
+    flex: 0 0 31px !important;
+  }
+
+  .shop-search input {
+    display: block !important;
+    flex: 1 1 auto !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+    height: 31px !important;
+
+    margin: 0 !important;
+    padding: 2px 0 0 !important;
+
+    border: 0 !important;
+    background: transparent !important;
+
+    font-size: 16px !important;
+    line-height: 29px !important;
+
+    transform: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  .shop-search input::placeholder {
+    font-size: 16px !important;
+    line-height: 29px !important;
+  }
+}
+  @media (max-width: 760px) {
+  .shop-search {
+    align-items: center !important;
+  }
+
+  .shop-search-icon {
+    align-self: center !important;
+    transform: translateY(0) !important;
+  }
+
+  .shop-search input {
+    height: auto !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    transform: translateY(2px) !important;
+  }
+}
       `}</style>
     </main>
   );

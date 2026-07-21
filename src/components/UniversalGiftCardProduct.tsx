@@ -442,93 +442,335 @@ export default function UniversalGiftCardProduct({
           }
         }
 
-        @media (max-width: 760px) {
-          .product-value-page {
-            display: block;
-            padding: 26px 16px 70px;
-          }
+@media (max-width: 760px) {
+  .universal-product-page {
+    width: 100% !important;
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
+    background: #f3f3f1 !important;
+  }
 
-          .product-value-frame {
-            width: 100%;
-            min-height: auto;
-            transform: none;
-          }
+  .product-value-page {
+    display: block !important;
+    width: 100% !important;
+    min-height: 100dvh !important;
+    padding: 7vw 6vw 16vw !important;
+    background: #f3f3f1 !important;
+    overflow-x: hidden !important;
+  }
 
-          .product-back-button {
-            position: relative;
-            left: auto;
-            top: auto;
-            display: inline-flex;
-            margin-bottom: 24px;
-            font-size: 16px;
-          }
+  .product-value-frame {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    transform: none !important;
+  }
 
-          .product-info-column,
-          .purchase-column {
-            position: relative;
-            left: auto;
-            top: auto;
-            width: 100%;
-          }
+  /* Back button */
 
-          .product-info-image-wrap {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 5 / 3;
-            border-radius: 26px;
-          }
+  .product-back-button {
+    position: relative !important;
+    display: inline-flex !important;
+    left: auto !important;
+    top: auto !important;
 
-          .product-info-title,
-          .product-info-copy,
-          .product-info-link,
-          .product-info-expiry,
-          .purchase-heading,
-          .amount-panel {
-            width: 100%;
-          }
+    width: auto !important;
+    min-height: 10vw !important;
 
-          .product-info-title {
-            margin-top: 26px;
-            font-size: 34px;
-          }
+    align-items: center !important;
 
-          .product-info-copy {
-            margin-top: 18px;
-            font-size: 18px;
-          }
+    margin: 0 0 8vw !important;
+    padding: 0 !important;
 
-          .purchase-column {
-            margin-top: 44px;
-          }
+    border: 0 !important;
+    background: transparent !important;
+    color: #8e8e8e !important;
 
-          .purchase-heading {
-            font-size: 34px;
-          }
+    font-size: 4.2vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
 
-          .amount-panel {
-            height: auto;
-            margin-top: 24px;
-            padding: 24px;
-            overflow: visible;
-          }
+  /* Product information */
 
-          .amount-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-          }
+  .product-info-column {
+    position: relative !important;
+    display: flex !important;
+    left: auto !important;
+    top: auto !important;
 
-          .amount-grid button {
-            height: 56px;
-            font-size: 20px;
-          }
+    width: 100% !important;
 
-          .continue-button {
-            width: 100%;
-            height: 62px;
-            margin: 24px 0 0;
-            font-size: 24px;
-          }
-        }
+    flex-direction: column !important;
+    align-items: center !important;
+
+    text-align: center !important;
+  }
+
+  .product-info-image-wrap {
+    width: 64vw !important;
+    max-width: 320px !important;
+    height: 38.4vw !important;
+    max-height: 192px !important;
+    aspect-ratio: auto !important;
+
+    margin: 0 auto !important;
+
+    border-radius: 4.5vw !important;
+    overflow: hidden !important;
+
+    background: transparent !important;
+
+    box-shadow:
+      0 1vw 1.5vw rgba(0, 0, 0, 0.04),
+      0 2.5vw 4vw rgba(0, 0, 0, 0.05),
+      0 4vw 12vw rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .product-info-image-wrap img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  .product-info-title {
+    width: 88vw !important;
+    max-width: 100% !important;
+
+    margin: 7vw auto 0 !important;
+
+    color: #000000 !important;
+
+    font-size: 6.2vw !important;
+    font-weight: 700 !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.18vw !important;
+
+    text-align: center !important;
+  }
+
+  .product-info-copy {
+    width: 87vw !important;
+    max-width: 100% !important;
+
+    margin: 4.5vw auto 0 !important;
+
+    color: #000000 !important;
+
+    font-size: 3.85vw !important;
+    font-weight: 500 !important;
+    line-height: 1.22 !important;
+    letter-spacing: -0.04vw !important;
+
+    text-align: center !important;
+  }
+
+  .product-info-link {
+    width: auto !important;
+    max-width: 88vw !important;
+
+    margin: 5vw auto 0 !important;
+
+    color: #115cd0 !important;
+
+    font-size: 3.65vw !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+
+    text-align: center !important;
+  }
+
+  .product-info-expiry {
+    width: auto !important;
+
+    margin: 6vw auto 0 !important;
+
+    color: #000000 !important;
+
+    font-size: 5.2vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+
+    text-align: center !important;
+  }
+
+  /* Purchase section */
+
+  .purchase-column {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+
+    width: 100% !important;
+
+    margin: 12vw 0 0 !important;
+    padding: 0 !important;
+  }
+
+  .purchase-heading {
+    width: 88vw !important;
+    max-width: 100% !important;
+
+    margin: 0 auto 5vw !important;
+
+    color: #000000 !important;
+
+    font-size: 7vw !important;
+    font-weight: 700 !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.22vw !important;
+
+    text-align: center !important;
+  }
+
+  /* Remove the desktop white denomination panel */
+
+  .amount-panel {
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 1vw 0 4vw !important;
+
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    overflow: visible !important;
+  }
+
+  /* Horizontal Linktree-style amount row */
+
+  .amount-grid {
+    display: flex !important;
+
+    width: 100% !important;
+
+    grid-template-columns: none !important;
+    gap: 3vw !important;
+
+    margin: 0 !important;
+    padding: 0 1vw 2vw !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    scroll-snap-type: x proximity !important;
+    scroll-padding-left: 1vw !important;
+    overscroll-behavior-x: contain !important;
+
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .amount-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .amount-grid button {
+    flex: 0 0 30vw !important;
+
+    width: 30vw !important;
+    min-width: 30vw !important;
+    height: 12.5vw !important;
+
+    margin: 0 !important;
+    padding: 0 2vw !important;
+
+    border: 0 !important;
+    border-radius: 999px !important;
+
+    background: #000000 !important;
+    color: #ffffff !important;
+
+    font-size: 4vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+
+    scroll-snap-align: start !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .amount-grid button:hover,
+  .amount-grid button:focus-visible {
+    background: #000000 !important;
+    color: #ffffff !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .amount-grid button.is-selected,
+  .amount-grid button.is-selected:hover,
+  .amount-grid button.is-selected:focus-visible {
+    background: #115cd0 !important;
+    color: #ffffff !important;
+
+    transform: none !important;
+
+    box-shadow:
+      0 2vw 5vw rgba(17, 92, 208, 0.25) !important;
+  }
+
+  /* Continue button */
+
+  .continue-button {
+    position: relative !important;
+    display: flex !important;
+
+    width: 88vw !important;
+    max-width: 100% !important;
+    height: 14vw !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 5vw auto 0 !important;
+    padding: 0 5vw !important;
+
+    border: 0 !important;
+    border-radius: 999px !important;
+
+    background: #115cd0 !important;
+    color: #ffffff !important;
+
+    font-size: 5vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.1vw !important;
+
+    box-shadow:
+      0 3vw 8vw rgba(17, 92, 208, 0.24) !important;
+  }
+
+  .continue-button:hover,
+  .continue-button:focus-visible {
+    background: #115cd0 !important;
+    color: #ffffff !important;
+    transform: translateY(0) !important;
+  }
+}
+  @media (max-width: 760px) {
+  .amount-grid {
+    padding-top: 2vw !important;
+    padding-bottom: 6vw !important;
+  }
+
+  .amount-grid button.is-selected,
+  .amount-grid button.is-selected:hover,
+  .amount-grid button.is-selected:focus-visible {
+    box-shadow: 0 1.5vw 4vw rgba(17, 92, 208, 0.32) !important;
+  }
+}
       `}</style>
     </main>
   );

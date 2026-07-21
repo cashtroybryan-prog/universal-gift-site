@@ -312,6 +312,223 @@ export default function UniversalThankYouPage() {
             padding: 18px;
           }
         }
+          /* =========================================================
+   FINAL MOBILE UNIVERSAL THANK YOU PAGE
+   Desktop remains untouched.
+   ========================================================= */
+
+@media (max-width: 620px) {
+.thank-you-page {
+  width: 100% !important;
+  min-height: 100dvh !important;
+  padding:
+    max(54px, calc(env(safe-area-inset-top, 0px) + 24px))
+    14px
+    max(30px, env(safe-area-inset-bottom, 0px)) !important;
+
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(17, 92, 208, 0.55) 0%,
+      rgba(17, 92, 208, 0) 48%
+    ),
+    #030b1d !important;
+
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  overflow-x: hidden !important;
+}
+  
+  .thank-you-card {
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    padding: 28px 20px 22px !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 28px !important;
+
+    background: #ffffff !important;
+    color: #000000 !important;
+
+    text-align: center !important;
+
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.2),
+      0 28px 70px rgba(0, 0, 0, 0.28) !important;
+  }
+
+  .universal-logo {
+    display: block !important;
+    width: 92px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+  }
+
+  .success-icon {
+    display: flex !important;
+    width: 52px !important;
+    height: 52px !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 22px auto 0 !important;
+
+    border-radius: 999px !important;
+    background: #115cd0 !important;
+    color: #ffffff !important;
+
+    box-shadow: 0 10px 24px rgba(17, 92, 208, 0.25) !important;
+  }
+
+  .success-icon svg {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .eyebrow {
+    margin: 16px 0 0 !important;
+    color: #115cd0 !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+
+  .thank-you-card h1 {
+    width: 100% !important;
+    max-width: 300px !important;
+
+    margin: 10px auto 0 !important;
+
+    color: #000000 !important;
+    font-size: 34px !important;
+    font-weight: 700 !important;
+    line-height: 0.96 !important;
+    letter-spacing: -1.2px !important;
+  }
+
+  .description {
+    width: 100% !important;
+    max-width: 305px !important;
+
+    margin: 17px auto 0 !important;
+
+    color: #626262 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.38 !important;
+  }
+
+  .confirmation-box {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 13px !important;
+
+    margin: 22px 0 0 !important;
+    padding: 16px !important;
+
+    border-radius: 18px !important;
+    background: #f1f5fc !important;
+
+    text-align: left !important;
+  }
+
+  .confirmation-icon {
+    display: flex !important;
+    width: 38px !important;
+    height: 38px !important;
+    flex: 0 0 38px !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 999px !important;
+    background: #115cd0 !important;
+    color: #ffffff !important;
+  }
+
+  .confirmation-icon svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+
+  .confirmation-box > div {
+    min-width: 0 !important;
+  }
+
+  .confirmation-box strong {
+    display: block !important;
+    margin: 0 !important;
+
+    color: #000000 !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+  }
+
+  .confirmation-box p {
+    margin: 5px 0 0 !important;
+
+    color: #666666 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.35 !important;
+  }
+
+  .thank-you-actions {
+    display: grid !important;
+    width: 100% !important;
+    gap: 10px !important;
+    margin: 22px 0 0 !important;
+  }
+
+  .thank-you-actions button {
+    display: flex !important;
+    width: 100% !important;
+    height: 52px !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 18px !important;
+
+    border-radius: 999px !important;
+
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+
+    transform: none !important;
+  }
+
+  .primary-button {
+    gap: 9px !important;
+    border: 1px solid #115cd0 !important;
+    background: #115cd0 !important;
+    color: #ffffff !important;
+  }
+
+  .primary-button svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .secondary-button {
+    border: 1px solid #d7d7d7 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .thank-you-actions button:hover,
+  .thank-you-actions button:focus-visible {
+    transform: none !important;
+  }
+}
       `}</style>
     </main>
   );

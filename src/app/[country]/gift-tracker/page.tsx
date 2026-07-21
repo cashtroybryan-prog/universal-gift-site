@@ -12,8 +12,9 @@ export default function UniversalGiftTrackerPage() {
 
   const [email, setEmail] = useState("");
   const [orderNumber, setOrderNumber] = useState("");
-  const [hasSearched, setHasSearched] = useState(false);
-  const [navVisible, setNavVisible] = useState(true);
+const [hasSearched, setHasSearched] = useState(false);
+const [navVisible, setNavVisible] = useState(true);
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const lastScrollY = useRef(0);
 
@@ -46,6 +47,11 @@ export default function UniversalGiftTrackerPage() {
     };
   }, []);
 
+  const navigateTo = (path: string) => {
+  setMobileMenuOpen(false);
+  router.push(path);
+};
+
   const trackerReady =
     email.trim().length > 4 && orderNumber.trim().length > 3;
 
@@ -59,78 +65,135 @@ export default function UniversalGiftTrackerPage() {
 
   return (
     <main className="tracker-page">
-      <nav
-        className={`shop-nav-pill ${
-          navVisible ? "" : "shop-nav-pill-hidden"
-        }`}
-        aria-label="Main navigation"
+<nav
+  className={`shop-nav-pill ${
+    navVisible ? "" : "shop-nav-pill-hidden"
+  }`}
+  aria-label="Main navigation"
+>
+  <div className="shop-nav-left">
+    <a
+      className="shop-logo"
+      href={`/${country}/home`}
+      aria-label="Universal home"
+      onClick={(event) => {
+        event.preventDefault();
+        navigateTo(`/${country}/home`);
+      }}
+    >
+      <img
+        src="/images/universal-logo.png"
+        alt="Universal"
+        draggable={false}
+      />
+    </a>
+
+    <div className="shop-nav-links">
+      <a
+        className="shop-nav-shop-link"
+        href={`/${country}/shop`}
+        onClick={(event) => {
+          event.preventDefault();
+          navigateTo(`/${country}/shop`);
+        }}
       >
-        <div className="shop-nav-left">
-          <a
-            className="shop-logo"
-            href={`/${country}/home`}
-            aria-label="Universal home"
-            onClick={(event) => {
-              event.preventDefault();
-              router.push(`/${country}/home`);
-            }}
-          >
-            <img
-              src="/images/universal-logo.png"
-              alt="Universal"
-              draggable={false}
-            />
-          </a>
+        Shop Gift Cards
+      </a>
 
-          <div className="shop-nav-links">
-            <a
-              href={`/${country}/shop`}
-              onClick={(event) => {
-                event.preventDefault();
-                router.push(`/${country}/shop`);
-              }}
-            >
-              Shop Gift Cards
-            </a>
+      <a
+        className="shop-nav-desktop-link"
+        href={`/${country}/how-it-works`}
+        onClick={(event) => {
+          event.preventDefault();
+          navigateTo(`/${country}/how-it-works`);
+        }}
+      >
+        How it Works
+      </a>
 
-            <a
-              href={`/${country}/how-it-works`}
-              onClick={(event) => {
-                event.preventDefault();
-                router.push(`/${country}/how-it-works`);
-              }}
-            >
-              How it Works
-            </a>
+      <a
+        className="shop-nav-desktop-link"
+        href={`/${country}/gift-tracker`}
+        onClick={(event) => {
+          event.preventDefault();
+          setMobileMenuOpen(false);
+        }}
+      >
+        Gift Tracker
+      </a>
+    </div>
+  </div>
 
-            <a
-              href={`/${country}/gift-tracker`}
-              onClick={(event) => event.preventDefault()}
-            >
-              Gift Tracker
-            </a>
-          </div>
-        </div>
+  <div className="shop-nav-actions">
+    <div
+      className="shop-country-pill"
+      aria-label="Shopping in Australia"
+    >
+      You are currently
+      <br />
+      shopping in Australia 🇦🇺
+    </div>
 
-        <div className="shop-nav-actions">
-          <div
-            className="shop-country-pill"
-            aria-label="Shopping in Australia"
-          >
-            You are currently
-            <br />
-            shopping in Australia 🇦🇺
-          </div>
+    <button className="shop-login-btn" type="button">
+      Log in
+    </button>
 
-          <button className="shop-login-btn" type="button">
-            Log in
-          </button>
+    <button className="shop-signup-btn" type="button">
+      Sign up
+    </button>
 
-          <button className="shop-signup-btn" type="button">
-            Sign up
-          </button>
-        </div>
-      </nav>
+    <button
+      className={`shop-mobile-menu-button ${
+        mobileMenuOpen ? "is-open" : ""
+      }`}
+      type="button"
+      aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+      aria-expanded={mobileMenuOpen}
+      onClick={() =>
+        setMobileMenuOpen((current) => !current)
+      }
+    >
+      <span />
+      <span />
+      <span />
+    </button>
+  </div>
+
+  {mobileMenuOpen && (
+    <div className="shop-mobile-nav-menu">
+      <button
+        type="button"
+        onClick={() =>
+          navigateTo(`/${country}/how-it-works`)
+        }
+      >
+        How it Works
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Gift Tracker
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Log in
+      </button>
+
+      <button
+        className="shop-mobile-nav-signup"
+        type="button"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Sign up free
+      </button>
+    </div>
+  )}
+</nav>
 
       <section className="tracker-shell">
         <div className="tracker-intro">
@@ -929,6 +992,360 @@ export default function UniversalGiftTrackerPage() {
             padding: 30px;
           }
         }
+          /* =========================================================
+   FINAL GIFT TRACKER MOBILE NAV AND CENTRED INTRO
+   Matches the Universal Shop mobile navigation.
+   Desktop remains unchanged.
+   ========================================================= */
+
+.shop-mobile-menu-button,
+.shop-mobile-nav-menu {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .tracker-page {
+    padding-top:
+      calc(
+        max(
+            52px,
+            calc(env(safe-area-inset-top, 0px) + 12px)
+          ) + 23vw
+      ) !important;
+  }
+
+  /* MOBILE WHITE NAV */
+
+  .shop-nav-pill {
+    position: fixed !important;
+
+    left: 3.5398vw !important;
+    right: auto !important;
+    top: max(
+      52px,
+      calc(env(safe-area-inset-top, 0px) + 12px)
+    ) !important;
+
+    width: 92.9204vw !important;
+    max-width: none !important;
+    height: 16.8142vw !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 11.0619vw !important;
+
+    background: #ffffff !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+
+    overflow: visible !important;
+    z-index: 1000 !important;
+  }
+
+  .shop-nav-pill-hidden {
+    transform: translateY(-150%) !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+  }
+
+  .shop-nav-left,
+  .shop-nav-actions {
+    position: static !important;
+    display: block !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Universal logo */
+
+  .shop-logo {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 3.8vw !important;
+    top: 50% !important;
+
+    width: 13vw !important;
+    height: 10vw !important;
+    flex: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: translateY(-50%) !important;
+
+    z-index: 5 !important;
+  }
+
+  .shop-logo img {
+    display: block !important;
+
+    width: 13vw !important;
+    max-width: none !important;
+    height: auto !important;
+
+    object-fit: contain !important;
+  }
+
+  /* Shop Gift Cards label */
+
+  .shop-nav-links {
+    position: static !important;
+    display: block !important;
+
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .shop-nav-links .shop-nav-desktop-link {
+    display: none !important;
+  }
+
+  .shop-nav-links .shop-nav-shop-link {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 17.8vw !important;
+    top: 50% !important;
+
+    width: 26vw !important;
+    height: 6vw !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    color: #111111 !important;
+
+    font-size: 3.35vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.05vw !important;
+
+    white-space: nowrap !important;
+
+    transform: translateY(-50%) !important;
+
+    z-index: 5 !important;
+  }
+
+  /* Australia pill */
+
+  .shop-country-pill {
+    position: absolute !important;
+    display: flex !important;
+
+    left: 46.8vw !important;
+    top: 50% !important;
+
+    width: 31.2vw !important;
+    height: 7.35vw !important;
+    flex: none !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 1.4vw !important;
+
+    border: 0 !important;
+    border-radius: 999px !important;
+
+    background: #115cd0 !important;
+    color: #ffffff !important;
+
+    font-size: 1.82vw !important;
+    font-weight: 700 !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.015vw !important;
+    text-align: center !important;
+
+    white-space: normal !important;
+
+    transform: translateY(-50%) !important;
+
+    overflow: hidden !important;
+    z-index: 8 !important;
+  }
+
+  .shop-country-pill:hover {
+    background: #115cd0 !important;
+  }
+
+  .shop-login-btn,
+  .shop-signup-btn {
+    display: none !important;
+  }
+
+  /* Hamburger */
+
+  .shop-mobile-menu-button {
+    position: absolute !important;
+    display: flex !important;
+
+    right: 4.8vw !important;
+    top: 50% !important;
+
+    width: 7.9646vw !important;
+    height: 7.9646vw !important;
+
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 0.8849vw !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    background: transparent !important;
+
+    transform: translateY(-50%) !important;
+
+    cursor: pointer !important;
+    z-index: 20 !important;
+  }
+
+  .shop-mobile-menu-button span {
+    display: block !important;
+
+    width: 5.7522vw !important;
+    height: 0.4425vw !important;
+    min-height: 1.5px !important;
+
+    border-radius: 999px !important;
+    background: #111111 !important;
+
+    transition:
+      transform 180ms ease,
+      opacity 180ms ease !important;
+  }
+
+  .shop-mobile-menu-button.is-open span:nth-child(1) {
+    transform: translateY(1.3274vw) rotate(45deg) !important;
+  }
+
+  .shop-mobile-menu-button.is-open span:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .shop-mobile-menu-button.is-open span:nth-child(3) {
+    transform: translateY(-1.3274vw) rotate(-45deg) !important;
+  }
+
+  /* Mobile dropdown */
+
+  .shop-mobile-nav-menu {
+    position: absolute !important;
+    display: grid !important;
+
+    right: 0 !important;
+    top: calc(100% + 2.6549vw) !important;
+
+    width: 56vw !important;
+
+    padding: 2.6549vw !important;
+    gap: 1.3274vw !important;
+
+    border: 1px solid #ebebeb !important;
+    border-radius: 4.4248vw !important;
+
+    background: #ffffff !important;
+
+    box-shadow: 0 4vw 10vw rgba(0, 0, 0, 0.14) !important;
+
+    z-index: 30 !important;
+  }
+
+  .shop-mobile-nav-menu button {
+    display: flex !important;
+
+    width: 100% !important;
+    height: 10.6195vw !important;
+
+    align-items: center !important;
+
+    padding: 0 3.5398vw !important;
+
+    border: 0 !important;
+    border-radius: 3.0973vw !important;
+
+    background: #f3f3f1 !important;
+    color: #111111 !important;
+
+    font-family: inherit !important;
+    font-size: 3.5398vw !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+  }
+
+  .shop-mobile-nav-menu .shop-mobile-nav-signup {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* CENTRE THE MOBILE TITLE AREA */
+
+  .tracker-shell {
+    padding-top: 10vw !important;
+  }
+
+  .tracker-intro {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin: 0 auto !important;
+
+    text-align: center !important;
+  }
+
+  .tracker-intro .eyebrow {
+    width: 100% !important;
+
+    margin: 0 auto !important;
+
+    text-align: center !important;
+  }
+
+.tracker-intro h1 {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 14px auto 0 !important;
+
+  font-size: 42px !important;
+  line-height: 1.06 !important;
+  letter-spacing: -2px !important;
+  text-align: center !important;
+}
+
+  .tracker-intro .intro-copy {
+    width: 100% !important;
+    max-width: 315px !important;
+
+    margin: 22px auto 0 !important;
+
+    text-align: center !important;
+  }
+}
       `}</style>
     </main>
   );

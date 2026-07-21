@@ -1346,6 +1346,119 @@ const handleContinue = () => {
     margin-top: 5vw !important;
   }
 }
+  /* =========================================================
+   FINAL MOBILE RECIPIENT CONTROLS
+   More compact gift-value pill and horizontal recipient tabs.
+   Desktop remains untouched.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  /* Compact Gift value row */
+
+  .universal-recipient-page .gift-value-row {
+    height: clamp(52px, 14vw, 58px) !important;
+  }
+
+  .universal-recipient-page .gift-value-row h2 {
+    font-size: clamp(16px, 4.4vw, 18px) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  .universal-recipient-page .amount-control {
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+  }
+
+  /* Smaller blue amount bubble */
+
+  .universal-recipient-page .amount-pill {
+    width: auto !important;
+    min-width: clamp(78px, 23vw, 92px) !important;
+    height: clamp(36px, 10vw, 42px) !important;
+
+    padding: 0 13px !important;
+
+    font-size: clamp(17px, 5vw, 21px) !important;
+    line-height: 1 !important;
+
+    border-radius: 999px !important;
+  }
+
+  .universal-recipient-page .amount-chevron {
+    width: 25px !important;
+    height: 38px !important;
+  }
+
+  .universal-recipient-page .amount-chevron span {
+    width: 10px !important;
+    height: 10px !important;
+
+    border-right-width: 4px !important;
+    border-bottom-width: 4px !important;
+
+    transform: translateY(-2px) rotate(45deg) !important;
+  }
+
+  .universal-recipient-page
+    .amount-chevron.is-open
+    span {
+    transform: translateY(2px) rotate(225deg) !important;
+  }
+
+  /* More compact heading */
+
+  .universal-recipient-page .recipient-heading {
+    margin: 6vw 0 4vw !important;
+
+    font-size: clamp(25px, 7vw, 30px) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.8px !important;
+  }
+
+  /* Someone else and Myself side by side */
+
+  .universal-recipient-page .recipient-toggle {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+    width: 100% !important;
+    height: clamp(58px, 15vw, 64px) !important;
+
+    gap: 4px !important;
+    padding: 4px !important;
+
+    border: 1.5px solid #111111 !important;
+    border-radius: 999px !important;
+  }
+
+  .universal-recipient-page .recipient-toggle button {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+
+    padding: 0 8px !important;
+
+    border-radius: 999px !important;
+
+    font-size: clamp(13px, 3.8vw, 16px) !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .universal-recipient-page
+    .recipient-toggle
+    button.is-active {
+    background: #115cd0 !important;
+    color: #ffffff !important;
+  }
+
+  .universal-recipient-page .recipient-form-card {
+    margin-top: 4vw !important;
+  }
+}
       `}</style>
     </main>
   );

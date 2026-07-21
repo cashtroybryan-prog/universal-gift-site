@@ -1792,7 +1792,7 @@ className={`brand-showcase-card ${
     left: 3.5398vw !important;
     right: auto !important;
     top: max(
-      14px,
+      32px,
       calc(env(safe-area-inset-top, 0px) + 8px)
     ) !important;
 

@@ -1006,20 +1006,20 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 @media (max-width: 760px) {
   /* PAGE POSITIONING */
 
-  .tracker-page {
-    width: 100% !important;
-    min-height: 100dvh !important;
+.tracker-page {
+  width: 100% !important;
+  min-height: 100dvh !important;
 
-    padding-top:
-      calc(
-        max(
-            14px,
-            calc(env(safe-area-inset-top, 0px) + 8px)
-          ) + 21vw
-      ) !important;
+  padding-top:
+    calc(
+      max(
+          32px,
+          calc(env(safe-area-inset-top, 0px) + 14px)
+        ) + 21vw
+    ) !important;
 
-    overflow-x: hidden !important;
-  }
+  overflow-x: hidden !important;
+}
 
   /* MOBILE WHITE NAV */
 
@@ -1030,11 +1030,11 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     left: 3.5398vw !important;
     right: auto !important;
 
-    top: max(
-      14px,
-      calc(env(safe-area-inset-top, 0px) + 8px)
-    ) !important;
-
+top: max(
+  32px,
+  calc(env(safe-area-inset-top, 0px) + 14px)
+) !important;
+ 
     width: 92.9204vw !important;
     max-width: none !important;
     height: clamp(52px, 16.8142vw, 66px) !important;

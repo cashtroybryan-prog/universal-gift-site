@@ -1325,6 +1325,27 @@ const handleContinue = () => {
     margin: 0 !important;
   }
 }
+  /* =========================================================
+   MOBILE RECIPIENT PAGE
+   Keep product title, hide supporting copy and links.
+   Desktop remains untouched.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .universal-recipient-page .product-info-copy,
+  .universal-recipient-page .product-info-link,
+  .universal-recipient-page .product-info-expiry {
+    display: none !important;
+  }
+
+  .universal-recipient-page .product-info-title {
+    display: block !important;
+  }
+
+  .universal-recipient-page .recipient-column {
+    margin-top: 5vw !important;
+  }
+}
       `}</style>
     </main>
   );

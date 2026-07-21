@@ -886,8 +886,8 @@ const navigateTo = (path: string) => {
   .universal-how-page {
     padding-top: calc(
       max(
-          14px,
-          calc(env(safe-area-inset-top, 0px) + 8px)
+          32px,
+          calc(env(safe-area-inset-top, 0px) + 14px)
         ) + 23vw
     ) !important;
   }
@@ -899,8 +899,8 @@ const navigateTo = (path: string) => {
     left: 3.5398vw !important;
     right: auto !important;
     top: max(
-      14px,
-      calc(env(safe-area-inset-top, 0px) + 8px)
+      32px,
+      calc(env(safe-area-inset-top, 0px) + 14px)
     ) !important;
 
     width: 92.9204vw !important;
@@ -1233,9 +1233,9 @@ const navigateTo = (path: string) => {
   .universal-how-page {
     padding-top: calc(
       max(
-          14px,
-          calc(env(safe-area-inset-top, 0px) + 8px)
-        ) + 24vw
+          32px,
+          calc(env(safe-area-inset-top, 0px) + 14px)
+        ) + 27vw
     ) !important;
   }
 

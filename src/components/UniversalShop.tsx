@@ -2093,8 +2093,8 @@ const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
   .universal-shop-page {
     padding-top: calc(
       max(
-          14px,
-          calc(env(safe-area-inset-top, 0px) + 8px)
+          32px,
+          calc(env(safe-area-inset-top, 0px) + 14px)
         ) + 23vw
     ) !important;
   }
@@ -2106,8 +2106,8 @@ const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
     left: 3.5398vw !important;
     right: auto !important;
     top: max(
-      14px,
-      calc(env(safe-area-inset-top, 0px) + 8px)
+      32px,
+      calc(env(safe-area-inset-top, 0px) + 14px)
     ) !important;
 
     width: 92.9204vw !important;

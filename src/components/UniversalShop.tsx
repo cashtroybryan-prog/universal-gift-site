@@ -20,7 +20,7 @@ type UniversalShopProps = {
 
 const assets = {
   logo: "/images/universal-logo.png",
-heroVideo: "/videos/mbappe-minions-video.mp4",
+heroVideo: "/videos/mbappe-minions-lower-quality.mp4",
 };
 
 const shopCards: {

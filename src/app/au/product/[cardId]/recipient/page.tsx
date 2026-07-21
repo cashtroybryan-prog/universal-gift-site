@@ -196,9 +196,8 @@ const handleContinue = () => {
 )}
 
 <div className="recipient-divider" />
-          <div className="recipient-divider" />
 
-          <h3 className="recipient-heading">Who is this gift for?</h3>
+<h3 className="recipient-heading">Who is this gift for?</h3>
 
           <div className="recipient-toggle">
             <button
@@ -1083,7 +1082,9 @@ const handleContinue = () => {
 .amount-menu + .recipient-heading {
   margin-top: 24px !important;
 }
-    /* =========================================================
+}
+
+/* =========================================================
    MOBILE PRODUCT INFO CENTRING
    Desktop remains untouched.
    ========================================================= */
@@ -1159,6 +1160,169 @@ const handleContinue = () => {
 
   .recipient-phone-mobile {
     display: block !important;
+  }
+}
+  /* =========================================================
+   FINAL MOBILE TOP ROW
+   Exact same Back position as the Gift Product page.
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .universal-recipient-page .recipient-frame {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 100dvh !important;
+
+    margin: 0 !important;
+    padding: 7vw 6vw 16vw !important;
+
+    background: #f3f3f1 !important;
+    transform: none !important;
+  }
+
+  /* Exact copy of the Gift Product mobile Back button */
+
+  .universal-recipient-page .recipient-back {
+    position: relative !important;
+    display: inline-flex !important;
+
+    left: auto !important;
+    top: auto !important;
+
+    width: auto !important;
+    min-height: 10vw !important;
+
+    align-items: center !important;
+
+    margin: 0 0 8vw !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    background: transparent !important;
+    color: #8e8e8e !important;
+
+    font-size: 4.2vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* X aligned to the exact same 10vw-high top row */
+
+  .universal-recipient-page .recipient-close {
+    position: absolute !important;
+    display: flex !important;
+
+    top: 7vw !important;
+    right: 6vw !important;
+
+    width: 10vw !important;
+    height: 10vw !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 0 0.7vw !important;
+
+    border: 0 !important;
+    border-radius: 999px !important;
+
+    background: #e2e2df !important;
+    color: #000000 !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 7vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+
+    z-index: 20 !important;
+  }
+}
+  /* EXACT PRODUCT PAGE MOBILE TEXT SIZING */
+
+@media (max-width: 760px) {
+  .universal-recipient-page .product-info-title {
+    width: 88vw !important;
+    max-width: 100% !important;
+
+    margin: 7vw auto 0 !important;
+
+    font-size: 6.2vw !important;
+    font-weight: 700 !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.18vw !important;
+
+    text-align: center !important;
+  }
+
+  .universal-recipient-page .product-info-copy {
+    width: 87vw !important;
+    max-width: 100% !important;
+
+    margin: 4.5vw auto 0 !important;
+
+    font-size: 3.85vw !important;
+    font-weight: 500 !important;
+    line-height: 1.22 !important;
+    letter-spacing: -0.04vw !important;
+
+    text-align: center !important;
+  }
+
+  .universal-recipient-page .product-info-link {
+    width: auto !important;
+    max-width: 88vw !important;
+
+    margin: 5vw auto 0 !important;
+
+    font-size: 3.65vw !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+
+    text-align: center !important;
+  }
+
+  .universal-recipient-page .product-info-expiry {
+    width: auto !important;
+
+    margin: 6vw auto 0 !important;
+
+    font-size: 5.2vw !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+
+    text-align: center !important;
+  }
+}
+  /* MOBILE FORM CARD HEIGHT */
+
+@media (max-width: 760px) {
+  .universal-recipient-page .recipient-form-card {
+    min-height: 245px !important;
+    height: auto !important;
+    padding: 20px 22px 32px !important;
+  }
+
+  .universal-recipient-page .recipient-form-card p {
+    margin: 13px 0 0 !important;
+  }
+}
+  @media (max-width: 760px) {
+  .universal-recipient-page .recipient-form-card.is-myself {
+    min-height: 120px !important;
+    height: auto !important;
+    padding: 20px 22px !important;
+
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .universal-recipient-page .recipient-form-card.is-myself .myself-message {
+    min-height: 0 !important;
+    margin: 0 !important;
   }
 }
       `}</style>

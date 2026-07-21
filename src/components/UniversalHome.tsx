@@ -31,9 +31,9 @@ type ParticipatingBrandGroup = {
 };
 
 const assets = {
-  movieVideo: "/videos/mbappe-minions-video.mp4",
-  merchVideo: "/videos/how-to-train-your-dragon-toys.mp4",
-  fuelVideo: "/videos/minions-shell.mp4",
+  movieVideo: "/videos/mbappe-minions-lower-quality.mp4",
+  merchVideo: "/videos/how-to-train-your-dragon-toys-lower-quality.mp4",
+  fuelVideo: "/videos/minions-shell-lower-quality.mp4",
   movieCard: "/images/universal-movie-day-gift-card.png",
   merchCard: "/images/universal-merch-gift-card.png",
   fuelCard: "/images/universal-fuel-gift-card.png",

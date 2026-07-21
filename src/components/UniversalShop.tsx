@@ -1948,23 +1948,17 @@ const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
 
   /* Remove the white space inside the merch image on mobile only */
 
-  .shop-gift-card-merch .shop-card-image-wrap {
-    background: #ffffff !important;
-  }
+.shop-gift-card-merch .shop-card-image-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
 
-  .shop-gift-card-merch .shop-card-image-wrap img {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
 
-    object-fit: cover !important;
-    object-position: center center !important;
-
-    transform: scale(1.16) translateY(-1.5%) !important;
-    transform-origin: center center !important;
-  }
+  transform: none !important;
 }
-/* =========================================================
+  /* =========================================================
    FINAL MOBILE SEARCH ICON
    Desktop remains completely unchanged.
    ========================================================= */
